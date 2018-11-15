@@ -9,3 +9,6 @@ class Phone(models.Model):
 
     country_code = models.CharField("Код страны", validators=[MinLengthValidator(2)], max_length = 4)
     number = models.CharField("Номер", validators=[MinLengthValidator(4)], max_length = 14)
+
+    def __str__(self):
+        return self.country_code + self.number
