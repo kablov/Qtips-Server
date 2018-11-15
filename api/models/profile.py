@@ -18,3 +18,6 @@ class Profile(models.Model):
     last_name = models.CharField("Фамилия", max_length = 50)
     photo = models.TextField("Ссылка на фото", blank = True, null = True)
     status = models.CharField("Статус", max_length = 7, choices = status, default = "pure")
+
+    def __str__(self):
+        return str(self.profile_id) + ") " + self.first_name + " " + self.last_name
