@@ -7,3 +7,10 @@ class ProfileAdmin(admin.ModelAdmin):
     list_display = ['profile_id', 'phone', 'first_name', 'last_name', 'status']
     list_per_page = 20
     ordering = ('id',)
+
+
+@admin.register(Phone)
+class PhoneAdmin(admin.ModelAdmin):
+    list_display = ['country_code', 'number']
+    list_per_page = 20
+    ordering = ('id',)
