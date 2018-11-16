@@ -5,6 +5,8 @@ from rest_framework.response import Response
 from api.models import *
 from api.serializers import *
 from qtips.exceptions import *
+from api.functions import *
+import random
 
 
 class AuthView(APIView):
@@ -27,6 +29,8 @@ class SignUpView(APIView):
         first_name = request.data['first_name']
         last_name = request.data['last_name']
         photo = request.data['photo']
+        external_id = random.SystemRandom().randint(100000,999999)
+        external_id = external_id_check(external_id)
 
         if country_code == '':
             raise CountryCodeNotEntered("Не введен код страны")
@@ -49,16 +53,16 @@ class SignUpView(APIView):
             phone.country_code = country_code
             phone.number = number
             phone.save()
+
+            profile = Profile()
+            profile.external_id = external_id
+            profile.phone = phone
+            profile.first_name = first_name
+            profile.last_name = last_name
+            profile.photo = photo
+            profile.save()
         else:
             raise PhoneEngaged("Аккаунт с таким номером телефона уже существует")
-
-        profile = Profile()
-        profile.external_id = 999999
-        profile.phone = phone
-        profile.first_name = first_name
-        profile.last_name = last_name
-        profile.photo = photo
-        profile.save()
 
         serializer = ProfileSerializer(profile)
         return Response(serializer.data, status = status.HTTP_201_CREATED)
