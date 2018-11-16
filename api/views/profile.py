@@ -22,7 +22,7 @@ class AuthView(APIView):
 class ProfilePageView(APIView):
     def get(self, request, id, format = None):
         profile = Profile.objects.get(external_id = id)
-        serializer = ProfileSerializer(profile, context = {'request': request})
+        serializer = ProfileSerializer(profile)
         return Response(serializer.data, status = status.HTTP_200_OK)
 
     def put(self, request, id, format = None):
