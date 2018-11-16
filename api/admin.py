@@ -14,3 +14,10 @@ class PhoneAdmin(admin.ModelAdmin):
     list_display = ['country_code', 'number']
     list_per_page = 20
     ordering = ('id',)
+
+
+@admin.register(SmsCode)
+class SmsCodeAdmin(admin.ModelAdmin):
+    list_display = ['phone', 'code']
+    list_per_page = 20
+    ordering = ('id',)
