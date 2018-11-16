@@ -37,10 +37,20 @@ class SignUpView(APIView):
         if last_name == '':
             raise LastNameNotEntered("Не введена фамилия")
 
-        phone = Phone()
-        phone.country_code = country_code
-        phone.number = number
-        phone.save()
+        phones = Phone.objects.all()
+        is_registered = False
+        for phone in phones:
+            if country_code == phone.country_code and number == phone.number:
+                is_registered = True
+                break
+
+        if is_registered == False:
+            phone = Phone()
+            phone.country_code = country_code
+            phone.number = number
+            phone.save()
+        else:
+            raise PhoneEngaged("Аккаунт с таким номером телефона уже существует")
 
         profile = Profile()
         profile.external_id = 999999
