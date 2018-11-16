@@ -14,7 +14,7 @@ class AuthView(APIView):
         is_registered = False
         for phone in phones:
             if country_code == phone.country_code and number == phone.number:
-                is_registred = True
+                is_registered = True
                 break
         return Response(is_registered, status = status.HTTP_200_OK)
 
