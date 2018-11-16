@@ -4,6 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from api.models import *
 from api.serializers import *
+from qtips.exceptions import *
 
 
 class AuthView(APIView):
@@ -17,6 +18,40 @@ class AuthView(APIView):
                 is_registered = True
                 break
         return Response(is_registered, status = status.HTTP_200_OK)
+
+
+class SignUpView(APIView):
+    def post(self, request, format = None):
+        country_code = request.data['country_code']
+        number = request.data['number']
+        first_name = request.data['first_name']
+        last_name = request.data['last_name']
+        photo = request.data['photo']
+
+        if country_code == '':
+            raise CountryCodeNotEntered("Не введен код страны")
+        if number == '':
+            raise NumberNotEntered("Не введен номер")
+        if first_name == '':
+            raise FirstNameNotEntered("Не введено имя")
+        if last_name == '':
+            raise LastNameNotEntered("Не введена фамилия")
+
+        phone = Phone()
+        phone.country_code = country_code
+        phone.number = number
+        phone.save()
+
+        profile = Profile()
+        profile.external_id = 999999
+        profile.phone = phone
+        profile.first_name = first_name
+        profile.last_name = last_name
+        profile.photo = photo
+        profile.save()
+
+        serializer = ProfileSerializer(profile)
+        return Response(serializer.data, status = status.HTTP_201_CREATED)
 
 
 class ProfilePageView(APIView):
