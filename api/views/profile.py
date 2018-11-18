@@ -5,7 +5,6 @@ from rest_framework.response import Response
 from api.models import *
 from api.serializers import *
 from qtips.exceptions import *
-from api.functions import *
 import random
 
 
@@ -29,8 +28,6 @@ class SignUpView(APIView):
         first_name = request.data['first_name']
         last_name = request.data['last_name']
         photo = request.data['photo']
-        external_id = random.SystemRandom().randint(100000,999999)
-        external_id = external_id_check(external_id)
 
         if country_code == '':
             raise CountryCodeNotEntered("Не введен код страны")
@@ -55,7 +52,6 @@ class SignUpView(APIView):
             phone.save()
 
             profile = Profile()
-            profile.external_id = external_id
             profile.phone = phone
             profile.first_name = first_name
             profile.last_name = last_name
