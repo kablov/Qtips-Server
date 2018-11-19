@@ -8,7 +8,7 @@ class SmsCode(models.Model):
         verbose_name = 'Код'
         verbose_name_plural = 'Коды'
 
-    phone = models.ForeignKey(Phone, verbose_name = "Номер телефона", on_delete = models.DO_NOTHING)
+    phone = models.OneToOneField(Phone, verbose_name = "Номер телефона", on_delete = models.DO_NOTHING)
     code = models.CharField("Код", validators=[MinLengthValidator(4)], max_length = 4)
 
     def __str__(self):
