@@ -12,4 +12,4 @@ class SmsCode(models.Model):
     code = models.CharField("Код", validators=[MinLengthValidator(4)], max_length = 4)
 
     def __str__(self):
-        return "Номер: " + self.phone + "Код: " + self.code
+        return "Номер: " + str(self.phone) + "Код: " + self.code
