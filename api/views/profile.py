@@ -15,6 +15,7 @@ class AuthView(APIView):
         country_code = request.data['country_code']
         number = request.data['number']
         is_registered = False
+        
         if Phone.objects.filter(Q(country_code = country_code) & Q(number = number)).count() == 0:
             phone = Phone()
             phone.country_code = country_code
@@ -62,11 +63,7 @@ class SignUpView(APIView):
         if last_name == '':
             raise LastNameNotEntered("Не введена фамилия")
 
-        is_registered = False
-        if Phone.objects.get(Q(country_code == phone.country_code) & Q(number == phone.number)):
-            is_registered = True
-
-        if is_registered == False:
+        if Phone.objects.filter(Q(country_code = country_code) & Q(number = number)).count() == 0:
             phone = Phone()
             phone.country_code = country_code
             phone.number = number
@@ -78,6 +75,16 @@ class SignUpView(APIView):
             profile.last_name = last_name
             profile.photo = photo
             profile.save()
+
+        elif Phone.objects.filter(Q(country_code = country_code) & Q(number = number)).count() > 0 and Profile.objects.filter(phone = Phone.objects.get(Q(country_code = country_code) & Q(number = number))).count() == 0:
+            phone = Phone.objects.get(Q(country_code = country_code) & Q(number = number))
+            profile = Profile()
+            profile.phone = phone
+            profile.first_name = first_name
+            profile.last_name = last_name
+            profile.photo = photo
+            profile.save()
+
         else:
             raise PhoneEngaged("Аккаунт с таким номером телефона уже существует")
 
