@@ -14,10 +14,9 @@ class AuthView(APIView):
         number = request.data['number']
         phones = Phone.objects.all()
         is_registered = False
-        for phone in phones:
-            if country_code == phone.country_code and number == phone.number:
-                is_registered = True
-                break
+        if Phone.objects.filter(Q(country_code == phone.country_code) & Q(number == phone.number)) > 0:
+            is_registered = True
+
         return Response(is_registered, status = status.HTTP_200_OK)
 
 
