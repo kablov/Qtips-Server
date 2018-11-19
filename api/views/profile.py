@@ -37,9 +37,8 @@ class SignUpView(APIView):
         if last_name == '':
             raise LastNameNotEntered("Не введена фамилия")
 
-        phones = Phone.objects.all()
         is_registered = False
-        if Phone.objects.filter(Q(country_code == phone.country_code) & Q(number == phone.number)) > 0:
+        if Phone.objects.get(Q(country_code == phone.country_code) & Q(number == phone.number)):
             is_registered = True
 
         if is_registered == False:
