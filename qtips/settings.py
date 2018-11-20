@@ -1,4 +1,6 @@
 import os
+from .database_settings import SecretKeys
+
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -58,12 +60,8 @@ TEMPLATES = [
 WSGI_APPLICATION = 'qtips.wsgi.application'
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+DATABASES = SecretKeys.DATABASE_PRODUCTION
+CLOUDINARY = SecretKeys.CLOUDINARY_PRODUCTION
 
 
 AUTH_PASSWORD_VALIDATORS = [
