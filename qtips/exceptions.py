@@ -15,20 +15,20 @@ class CountryCodeNotEntered(VerboseException):
 
 
 class NumberNotEntered(VerboseException):
-    code = 100
+    code = 101
     verbose_msg = "Не введен номер"
 
 
 class PhoneEngaged(VerboseException):
-    code = 100
-    verbose_msg = "Аккаунт с таким номером телефона уже существуе"
+    code = 102
+    verbose_msg = "Аккаунт с таким номером телефона уже существует"
 
 
 class FirstNameNotEntered(VerboseException):
-    code = 102
+    code = 103
     verbose_msg = "Не введено имя"
 
 
 class LastNameNotEntered(VerboseException):
-    code = 103
+    code = 104
     verbose_msg = "Не введена фамилия"
