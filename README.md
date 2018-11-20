@@ -1,1 +1,0 @@
-qtips_server
