@@ -32,3 +32,8 @@ class FirstNameNotEntered(VerboseException):
 class LastNameNotEntered(VerboseException):
     code = 104
     verbose_msg = "Не введена фамилия"
+
+
+class CodesDoNotMatch(VerboseException):
+    code = 105
+    verbose_msg = "Введенный код не совпадает с отправленным в смс"
