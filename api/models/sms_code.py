@@ -7,7 +7,7 @@ class SmsCode(models.Model):
     class Meta:
         verbose_name = 'Код'
         verbose_name_plural = 'Коды'
-
+    
     phone = models.OneToOneField(Phone, verbose_name = "Номер телефона", on_delete = models.CASCADE)
     code = models.CharField("Код", validators=[MinLengthValidator(4)], max_length = 4)
 
