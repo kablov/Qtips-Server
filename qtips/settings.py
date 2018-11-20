@@ -7,7 +7,9 @@ SECRET_KEY = 'cyjc9&j)5sj*u^%5b484(+k^0w2yff-si-+1r*-#t1g4f98ugg'
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'qtips-prod.herokuapp.com'
+]
 
 
 INSTALLED_APPS = [
