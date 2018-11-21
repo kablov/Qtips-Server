@@ -37,3 +37,8 @@ class LastNameNotEntered(VerboseException):
 class CodesDoNotMatch(VerboseException):
     code = 105
     verbose_msg = "Введенный код не совпадает с отправленным в смс"
+
+
+class AccessDenied(VerboseException):
+    code = 106
+    verbose_msg = "Токен не совпадает"
