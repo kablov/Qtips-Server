@@ -11,40 +11,6 @@ from qtips.permissions import *
 import random
 
 
-class AuthView(APIView):
-    def post(self, request, format = None):
-        country_code = request.data['country_code']
-        number = request.data['number']
-        is_registered = False
-
-        if Phone.objects.filter(Q(country_code = country_code) & Q(number = number)).count() == 0:
-            phone = Phone()
-            phone.country_code = country_code
-            phone.number = number
-            phone.save()
-            sms_code = SmsCode()
-            sms_code.phone = phone
-            sms_code.save()
-
-        elif Phone.objects.filter(Q(country_code = country_code) & Q(number = number)).count() > 0 and Profile.objects.filter(phone = Phone.objects.get(Q(country_code = country_code) & Q(number = number))).count() == 0:
-            phone = Phone.objects.get(Q(country_code = country_code) & Q(number = number))
-            SmsCode.objects.get(phone = phone).delete()
-            sms_code = SmsCode()
-            sms_code.phone = phone
-            sms_code.save()
-
-        else:
-            is_registered = True
-            phone = Phone.objects.get(Q(country_code = country_code) & Q(number = number))
-            SmsCode.objects.get(phone = phone).delete()
-            sms_code = SmsCode()
-            sms_code.phone = phone
-            sms_code.code = get_random_string(length = 4, allowed_chars = '1234567890')
-            sms_code.save()
-
-        return Response(is_registered, status = status.HTTP_200_OK)
-
-
 class SignUpView(APIView):
     def post(self, request, format = None):
         country_code = request.data['country_code']
