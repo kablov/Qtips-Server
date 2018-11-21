@@ -32,9 +32,7 @@ class Profile(models.Model):
         return str(self.external_id) + ") " + self.first_name + " " + self.last_name
 
     def save(self, *args, **kwargs):
-
         if Token.objects.filter(phone = self.phone).count() == 0:
-            print('dddddd')
             token = Token()
             token.phone = self.phone
             token.save()
@@ -42,5 +40,4 @@ class Profile(models.Model):
             sms_code = SmsCode()
             sms_code.phone = self.phone
             sms_code.save()
-
         models.Model.save(self, *args, **kwargs)

@@ -91,7 +91,12 @@ class SignUpView(APIView):
 
 
 class ProfilePageView(APIView):
+
     def get(self, request, id, format = None):
+
+        if Token.objects.filter(token = request.META.get('HTTP_TOKEN')).count() == 0:
+            raise AccessDenied("У вас нет прав для просмотра данной страницы")
+
         profile = Profile.objects.get(external_id = id)
         serializer = ProfileSerializer(profile)
         return Response(serializer.data, status = status.HTTP_200_OK)
