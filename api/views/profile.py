@@ -102,6 +102,15 @@ class ProfilePageView(APIView):
         return Response(serializer.data, status = status.HTTP_200_OK)
 
     def put(self, request, id, format = None):
+
+        profile = Profile.objects.get(external_id = id)
+
+        if Token.objects.filter(token = request.META.get('HTTP_TOKEN')).count() > 0:
+            if Token.objects.get(token = request.META.get('HTTP_TOKEN')) != profile.phone.token:
+                raise AccessDenied("У вас нет прав для изменения данного профиля")
+        else:
+            raise AccessDenied("У вас нет прав для изменения данного профиля")
+
         profile = Profile.objects.filter(external_id = id)
 
         if 'first_name' in request.data:
