@@ -4,6 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from api.models import *
 from qtips.exceptions import *
+from .send_sms import *
 
 
 class RequestCodeView(APIView):
@@ -19,6 +20,17 @@ class RequestCodeView(APIView):
             sms_code = SmsCode()
             sms_code.phone = phone
             sms_code.save()
+
+            full_phone_number = str(country_code) + str(number)
+            text = "Проверочный код: " + sms_code.code
+            try:
+                send_sms(full_phone_number, text)
+            except:
+                result = {
+                    'is_sent': False
+                }
+                return Response(result, status = status.HTTP_201_CREATED)
+
             result = {
                 'is_sent': True
             }
@@ -29,6 +41,17 @@ class RequestCodeView(APIView):
             sms_code = SmsCode()
             sms_code.phone = phone
             sms_code.save()
+
+            full_phone_number = str(country_code) + str(number)
+            text = "Проверочный код: " + sms_code.code
+            try:
+                send_sms(full_phone_number, text)
+            except:
+                result = {
+                    'is_sent': False
+                }
+                return Response(result, status = status.HTTP_201_CREATED)
+
             result = {
                 'is_sent': True
             }
