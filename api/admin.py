@@ -25,6 +25,6 @@ class SmsCodeAdmin(admin.ModelAdmin):
 
 @admin.register(Token)
 class TokenAdmin(admin.ModelAdmin):
-    list_display = ['phone', 'token']
+    list_display = ['profile', 'token']
     list_per_page = 20
     ordering = ('id',)

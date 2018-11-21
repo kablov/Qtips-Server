@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.crypto import get_random_string
+from django.core.validators import MinLengthValidator
 from api.models import *
 import uuid
 
@@ -12,8 +13,8 @@ class Token(models.Model):
     def get_new_token():
         return get_random_string(length = 32)
 
-    phone = models.OneToOneField(Phone, verbose_name = "Номер телефона", on_delete = models.DO_NOTHING)
-    token = models.CharField("Токен", max_length = 100, blank = True, unique = True, default = get_new_token)
+    profile = models.OneToOneField(Profile, verbose_name = "Профиль", on_delete = models.DO_NOTHING)
+    token = models.CharField("Токен", validators=[MinLengthValidator(32)], max_length = 32, unique = True, default = get_new_token)
 
     def __str__(self):
         return str(self.phone) + " " + self.token
