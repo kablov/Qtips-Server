@@ -18,7 +18,3 @@ class Token(models.Model):
 
     def __str__(self):
         return str(self.phone) + " " + self.token
-
-    def to_dict(self):
-        result = {'token': self.token}
-        return result
