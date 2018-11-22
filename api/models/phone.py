@@ -12,4 +12,4 @@ class Phone(models.Model):
     is_verified = models.BooleanField("Подтвержден?", default = False)
 
     def __str__(self):
-        return self.country_code + self.number
+        return str(self.country_code) + str(self.number)
