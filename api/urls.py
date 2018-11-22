@@ -5,8 +5,7 @@ from api.views import *
 
 urlpatterns = [
     path('code/request/', sms_code.RequestCodeView.as_view()),
+    path('code/verify/', sms_code.PhoneNumberVerificationView.as_view()),
     path('signup/', profile.SignUpView.as_view()),
     path('profile/<int:id>/', profile.ProfilePageView.as_view()),
-    path('code/', sms_code.PhoneNumberVerificationIfAccountExists.as_view()),
-    path('auth/code/', sms_code.PhoneNumberVerificationIfAccountDoesntExist.as_view()),
 ]

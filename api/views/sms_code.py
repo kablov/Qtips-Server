@@ -58,7 +58,7 @@ class RequestCodeView(APIView):
             return Response(result, status = status.HTTP_201_CREATED)
 
 
-class PhoneNumberVerificationIfAccountExists(APIView):
+class PhoneNumberVerificationView(APIView):
     def post(self, request, format = None):
         country_code = request.data['country_code']
         number = request.data['number']
@@ -66,23 +66,21 @@ class PhoneNumberVerificationIfAccountExists(APIView):
         phone = Phone.objects.get(Q(country_code = country_code) & Q(number = number))
         code_in_database = str(SmsCode.objects.get(phone = phone).code)
         if code == code_in_database:
-            token = Token.objects.get(phone = phone)
-            return Response(token.to_dict(), status = status.HTTP_200_OK)
+            phone.is_verified = True
+            if Profile.objects.filter(phone = phone).count() > 0:
+                profile = Profile.objects.get(phone = phone)
+                token = Token.objects.get(profile = profile)
+                result = {
+                    'is_verified': True,
+                    'token': token
+                }
+            else:
+                result = {
+                    'is_verified': True
+                }
+            return Response(result, status = status.HTTP_200_OK)
         else:
-            raise CodesDoNotMatch("Введенный код не совпадает с отправленным в смс")
-
-
-class PhoneNumberVerificationIfAccountDoesntExist(APIView):
-    def post(self, request, format = None):
-        country_code = request.data['country_code']
-        number = request.data['number']
-        code = request.data['code']
-        phone = Phone.objects.get(Q(country_code = country_code) & Q(number = number))
-        code_in_database = str(SmsCode.objects.get(phone = phone).code)
-        if code == code_in_database:
-            token = Token()
-            token.phone = phone
-            token.save()
-            return Response(token.to_dict(), status = status.HTTP_201_CREATED)
-        else:
-            raise CodesDoNotMatch("Введенный код не совпадает с отправленным в смс")
+            result = {
+                'is_verified': False
+            }
+            return Response(result, status = status.HTTP_200_OK)
