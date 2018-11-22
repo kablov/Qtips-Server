@@ -11,7 +11,7 @@ class ProfileAdmin(admin.ModelAdmin):
 
 @admin.register(Phone)
 class PhoneAdmin(admin.ModelAdmin):
-    list_display = ['country_code', 'number']
+    list_display = ['country_code', 'number', 'is_verified']
     list_per_page = 20
     ordering = ('id',)
 
