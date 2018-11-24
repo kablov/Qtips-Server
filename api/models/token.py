@@ -17,4 +17,4 @@ class Token(models.Model):
     token = models.CharField("Токен", validators=[MinLengthValidator(32)], max_length = 32, unique = True, default = get_new_token)
 
     def __str__(self):
-        return str(self.phone) + " " + self.token
+        return str(self.profile) + " " + self.token
