@@ -44,6 +44,7 @@ class NoUdid(VerboseException):
     verbose_msg = "Нет udid"
 
 
-class AccessDenied(VerboseException):
+class UdidsDoNotMatch(VerboseException):
     code = 107
-    verbose_msg = "Токен не совпадает"
+    verbose_msg = "udids не совпадают"
+
