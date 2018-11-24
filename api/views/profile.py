@@ -18,7 +18,10 @@ class SignUpView(APIView):
         first_name = request.data['first_name']
         last_name = request.data['last_name']
         photo = request.data['photo']
+        udid = request.data['udid']
 
+        if udid == '':
+            raise NoUdid("Нет udid")
         if country_code == '':
             raise CountryCodeNotEntered("Не введен код страны")
         if number == '':
@@ -28,14 +31,14 @@ class SignUpView(APIView):
         if last_name == '':
             raise LastNameNotEntered("Не введена фамилия")
 
-        if Phone.objects.filter(Q(country_code = country_code) & Q(number = number)).count() == 0:
-            phone = Phone()
+        phone = Phone.objects.get(Q(country_code = country_code) & Q(number = number))
+        sms_code_udid = SmsCode.objects.get(phone = phone).udid
             phone.country_code = country_code
             phone.number = number
             phone.save()
 
-            profile = Profile()
-            profile.phone = phone
+        if udid != sms_code_udid:
+            raise UdidsDoNotMatch("Введеный udid не совпадает с записанным в базе данных")
             profile.first_name = first_name
             profile.last_name = last_name
             profile.photo = photo
