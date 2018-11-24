@@ -74,7 +74,7 @@ class PhoneNumberVerificationView(APIView):
             sms_code.save(update_fields = ['udid'])
             if Profile.objects.filter(phone = phone).count() > 0:
                 profile = Profile.objects.get(phone = phone)
-                token = Token.objects.get(profile = profile)
+                token = Token.objects.get(profile = profile).token
                 result = {
                     'is_verified': True,
                     'token': token
