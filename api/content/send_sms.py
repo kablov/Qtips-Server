@@ -1,14 +1,15 @@
 from twilio.rest import Client
+from qtips import settings
 
 
 def send_sms(phone, text):
-    account_sid = "AC9fc8bf64e0f96d06e254e9962a6f0a6f"
-    auth_token = "46d6c4f7b46652dfe1420cd5179bfcd8"
+    account_sid = settings.TWILIO_ACCOUNT_SID
+    auth_token = settings.TWILIO_AUTH_TOKEN
 
     client = Client(account_sid, auth_token)
 
     client.messages.create(
         to = phone,
-        from_ = "+16148812580",
+        from_ = settings.TWILIO_FROM_NUMBER,
         body = text
     )
