@@ -18,7 +18,7 @@ class PhoneAdmin(admin.ModelAdmin):
 
 @admin.register(SmsCode)
 class SmsCodeAdmin(admin.ModelAdmin):
-    list_display = ['phone', 'code']
+    list_display = ['phone', 'udid', 'code']
     list_per_page = 20
     ordering = ('id',)
 
