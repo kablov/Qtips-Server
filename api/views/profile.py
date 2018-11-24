@@ -6,11 +6,9 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from api.models import *
 from api.serializers import *
+from api.content import *
 from qtips.exceptions import *
 from qtips.permissions import *
-import cloudinary
-import cloudinary.api
-import cloudinary.uploader
 import random
 
 
@@ -46,11 +44,7 @@ class SignUpView(APIView):
             profile.first_name = first_name
             profile.last_name = last_name
             if photo:
-                path = "profile/" + str(phone)
-                cloudinary_photo = cloudinary.uploader.upload_resource(photo, public_id = path)
-                url = cloudinary_photo.url
-                secure_url = str(url).replace("http", "https")
-                profile.photo = secure_url
+                profile.photo = upload_photo(photo, phone)
             else:
                 profile.photo = ''
             profile.save()
