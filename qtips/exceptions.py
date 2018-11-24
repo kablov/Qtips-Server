@@ -48,3 +48,9 @@ class UdidsDoNotMatch(VerboseException):
     code = 107
     verbose_msg = "udids не совпадают"
 
+
+class AccessDenied(VerboseException):
+    code = 108
+    verbose_msg = "Доступ запрещен"
+
+
