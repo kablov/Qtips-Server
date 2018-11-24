@@ -5,3 +5,4 @@ twilio==6.20.0
 gunicorn==19.7.1
 whitenoise==3.3.1
 psycopg2==2.7.6.1
+cloudinary==1.14.0
