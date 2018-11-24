@@ -19,9 +19,9 @@ class NumberNotEntered(VerboseException):
     verbose_msg = "Не введен номер"
 
 
-class PhoneEngaged(VerboseException):
+class ProfileEngaged(VerboseException):
     code = 102
-    verbose_msg = "Аккаунт с таким номером телефона уже существует"
+    verbose_msg = "Аккаунт с указанным номером телефона уже существует"
 
 
 class FirstNameNotEntered(VerboseException):
