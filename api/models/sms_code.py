@@ -14,6 +14,7 @@ class SmsCode(models.Model):
 
     phone = models.OneToOneField(Phone, verbose_name = "Номер телефона", on_delete = models.CASCADE)
     code = models.CharField("Код", validators=[MinLengthValidator(4)], max_length = 4, default = get_new_code)
+    udid = models.CharField(max_length = 36, blank = True)
 
     def __str__(self):
         return "Номер: " + str(self.phone) + " Код: " + self.code
