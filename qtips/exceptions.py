@@ -39,6 +39,11 @@ class CodesDoNotMatch(VerboseException):
     verbose_msg = "Введенный код не совпадает с отправленным в смс"
 
 
-class AccessDenied(VerboseException):
+class NoUdid(VerboseException):
     code = 106
+    verbose_msg = "Не удалось отправить код подтверждения"
+
+
+class AccessDenied(VerboseException):
+    code = 107
     verbose_msg = "Токен не совпадает"
