@@ -8,6 +8,9 @@ from api.models import *
 from api.serializers import *
 from qtips.exceptions import *
 from qtips.permissions import *
+import cloudinary
+import cloudinary.api
+import cloudinary.uploader
 import random
 
 
@@ -33,31 +36,35 @@ class SignUpView(APIView):
 
         phone = Phone.objects.get(Q(country_code = country_code) & Q(number = number))
         sms_code_udid = SmsCode.objects.get(phone = phone).udid
-            phone.country_code = country_code
-            phone.number = number
-            phone.save()
 
         if udid != sms_code_udid:
             raise UdidsDoNotMatch("Введеный udid не совпадает с записанным в базе данных")
-            profile.first_name = first_name
-            profile.last_name = last_name
-            profile.photo = photo
-            profile.save()
 
-        elif Phone.objects.filter(Q(country_code = country_code) & Q(number = number)).count() > 0 and Profile.objects.filter(phone = Phone.objects.get(Q(country_code = country_code) & Q(number = number))).count() == 0:
-            phone = Phone.objects.get(Q(country_code = country_code) & Q(number = number))
+        if Profile.objects.filter(phone = phone).count() == 0:
             profile = Profile()
             profile.phone = phone
             profile.first_name = first_name
             profile.last_name = last_name
-            profile.photo = photo
+            if photo:
+                path = "profile/" + str(phone)
+                cloudinary_photo = cloudinary.uploader.upload_resource(photo, public_id = path)
+                url = cloudinary_photo.url
+                secure_url = str(url).replace("http", "https")
+                profile.photo = secure_url
+            else:
+                profile.photo = ''
             profile.save()
-
+            token = Token()
+            token.profile = profile
+            token.save()
         else:
-            raise PhoneEngaged("Аккаунт с таким номером телефона уже существует")
+            raise ProfileEngaged("Аккаунт с указанным номером телефона уже существует")
 
-        serializer = ProfileSerializer(profile)
-        return Response(serializer.data, status = status.HTTP_201_CREATED)
+        token = profile.token.token
+        result = {
+            'token': token
+        }
+        return Response(result, status = status.HTTP_201_CREATED)
 
 
 class ProfilePageView(APIView):
