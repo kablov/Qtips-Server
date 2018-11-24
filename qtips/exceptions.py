@@ -36,7 +36,7 @@ class LastNameNotEntered(VerboseException):
 
 class CodesDoNotMatch(VerboseException):
     code = 105
-    verbose_msg = "Введенный код не совпадает с отправленным в смс"
+    verbose_msg = "Коды не совпадают"
 
 
 class NoUdid(VerboseException):
