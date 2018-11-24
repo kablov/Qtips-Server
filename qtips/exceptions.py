@@ -41,7 +41,7 @@ class CodesDoNotMatch(VerboseException):
 
 class NoUdid(VerboseException):
     code = 106
-    verbose_msg = "Не удалось отправить код подтверждения"
+    verbose_msg = "Нет udid"
 
 
 class AccessDenied(VerboseException):
