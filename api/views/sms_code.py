@@ -63,10 +63,15 @@ class PhoneNumberVerificationView(APIView):
         country_code = request.data['country_code']
         number = request.data['number']
         code = request.data['code']
+        udid = request.data['udid']
         phone = Phone.objects.get(Q(country_code = country_code) & Q(number = number))
         code_in_database = str(SmsCode.objects.get(phone = phone).code)
         if code == code_in_database:
             phone.is_verified = True
+            phone.save(update_fields=['is_verified'])
+            sms_code = SmsCode.objects.get(code = code)
+            sms_code.udid = udid
+            sms_code.save(update_fields = ['udid'])
             if Profile.objects.filter(phone = phone).count() > 0:
                 profile = Profile.objects.get(phone = phone)
                 token = Token.objects.get(profile = profile)
