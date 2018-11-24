@@ -54,3 +54,6 @@ class AccessDenied(VerboseException):
     verbose_msg = "Доступ запрещен"
 
 
+class CodeNotSent(VerboseException):
+    code = 109
+    verbose_msg = "Не удалось отправить код подтверждения"
