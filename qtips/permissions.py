@@ -9,7 +9,7 @@ def is_user(request):
 
 def is_owner_or_read_only(request, profile):
     if Token.objects.filter(token = request.META.get('HTTP_TOKEN')).count() > 0:
-        if Token.objects.get(token = request.META.get('HTTP_TOKEN')) != profile.phone.token:
+        if Token.objects.get(token = request.META.get('HTTP_TOKEN')) != profile.token:
             raise AccessDenied("У вас нет прав для изменения данного профиля")
     else:
         raise AccessDenied("У вас нет прав для изменения данного профиля")

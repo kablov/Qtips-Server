@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from api.models import *
 from qtips.exceptions import *
-from .send_sms import *
+from api.content import *
 
 
 class RequestCodeView(APIView):
