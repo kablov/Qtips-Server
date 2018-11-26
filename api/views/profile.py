@@ -14,6 +14,7 @@ import random
 
 class SignUpView(APIView):
     def post(self, request, format = None):
+        access_key_check(request)
         country_code = request.data['country_code']
         number = request.data['number']
         first_name = request.data['first_name']
@@ -64,12 +65,14 @@ class SignUpView(APIView):
 class ProfilePageView(APIView):
 
     def get(self, request, id, format = None):
+        access_key_check(request)
         is_user(request)
         profile = Profile.objects.get(external_id = id)
         serializer = ProfileSerializer(profile)
         return Response(serializer.data, status = status.HTTP_200_OK)
 
     def put(self, request, id, format = None):
+        access_key_check(request)
         profile = Profile.objects.get(external_id = id)
         is_owner_or_read_only(request, profile)
         profile = Profile.objects.filter(external_id = id)

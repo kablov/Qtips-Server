@@ -4,11 +4,13 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from api.models import *
 from qtips.exceptions import *
+from qtips.permissions import *
 from api.content import *
 
 
 class RequestCodeView(APIView):
     def post(self, request, format = None):
+        access_key_check(request)
         country_code = request.data['country_code']
         number = request.data['number']
         is_sent = False
@@ -60,6 +62,7 @@ class RequestCodeView(APIView):
 
 class PhoneNumberVerificationView(APIView):
     def post(self, request, format = None):
+        access_key_check(request)
         country_code = request.data['country_code']
         number = request.data['number']
         code = request.data['code']
