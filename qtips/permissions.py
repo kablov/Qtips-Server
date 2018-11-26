@@ -1,4 +1,5 @@
 from api.models import *
+from qtips import settings
 from qtips.exceptions import *
 
 
@@ -13,3 +14,9 @@ def is_owner_or_read_only(request, profile):
             raise AccessDenied("У вас нет прав для изменения данного профиля")
     else:
         raise AccessDenied("У вас нет прав для изменения данного профиля")
+
+
+def access_key_check(request):
+    if request.META.get('HTTP_ACCESS_KEY') != settings.ACCESS_KEY:
+        print(request.META.get('HTTP_ACCESS_KEY'))
+        raise AccessDenied("Доступ запрещен")
