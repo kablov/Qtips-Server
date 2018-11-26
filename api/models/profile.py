@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import RegexValidator
 from api.models import *
+from api.content import *
 import random
 
 
@@ -32,12 +33,12 @@ class Profile(models.Model):
         return str(self.external_id) + ") " + self.first_name + " " + self.last_name
 
     def save(self, *args, **kwargs):
-        if Token.objects.filter(phone = self.phone).count() == 0:
-            token = Token()
-            token.phone = self.phone
-            token.save()
         if SmsCode.objects.filter(phone = self.phone).count() == 0:
             sms_code = SmsCode()
             sms_code.phone = self.phone
             sms_code.save()
+
+            text = "Проверочный код: " + sms_code.code
+            send_sms(self.phone, text)
+
         models.Model.save(self, *args, **kwargs)
