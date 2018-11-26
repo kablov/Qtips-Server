@@ -9,10 +9,12 @@ from api.serializers import *
 from api.content import *
 from qtips.exceptions import *
 from qtips.permissions import *
+from qtips.decorators import *
 import random
 
 
 class SignUpView(APIView):
+    @catch_errors
     def post(self, request, format = None):
         access_key_check(request)
         country_code = request.data['country_code']
@@ -37,7 +39,7 @@ class SignUpView(APIView):
         sms_code_udid = SmsCode.objects.get(phone = phone).udid
 
         if udid != sms_code_udid:
-            raise UdidsDoNotMatch("Введеный udid не совпадает с записанным в базе данных")
+            raise UdidsDoNotMatch("udids не совпадают")
 
         if Profile.objects.filter(phone = phone).count() == 0:
             profile = Profile()
@@ -63,7 +65,7 @@ class SignUpView(APIView):
 
 
 class ProfilePageView(APIView):
-
+    @catch_errors
     def get(self, request, id, format = None):
         access_key_check(request)
         is_user(request)
@@ -71,6 +73,7 @@ class ProfilePageView(APIView):
         serializer = ProfileSerializer(profile)
         return Response(serializer.data, status = status.HTTP_200_OK)
 
+    @catch_errors
     def put(self, request, id, format = None):
         access_key_check(request)
         profile = Profile.objects.get(external_id = id)
