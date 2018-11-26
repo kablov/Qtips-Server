@@ -4,6 +4,7 @@ from .database_settings import SecretKeys
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+ACCESS_KEY = "JBVFDWH9pFp7MKQWfzLdxtLxYka0fZ9j"
 
 SECRET_KEY = 'cyjc9&j)5sj*u^%5b484(+k^0w2yff-si-+1r*-#t1g4f98ugg'
 
