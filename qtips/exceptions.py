@@ -9,29 +9,9 @@ class VerboseException(Exception):
         return self.code
 
 
-class CountryCodeNotEntered(VerboseException):
-    code = 100
-    verbose_msg = "Не введен код страны"
-
-
-class NumberNotEntered(VerboseException):
-    code = 101
-    verbose_msg = "Не введен номер"
-
-
 class ProfileEngaged(VerboseException):
     code = 102
     verbose_msg = "Аккаунт с указанным номером телефона уже существует"
-
-
-class FirstNameNotEntered(VerboseException):
-    code = 103
-    verbose_msg = "Не введено имя"
-
-
-class LastNameNotEntered(VerboseException):
-    code = 104
-    verbose_msg = "Не введена фамилия"
 
 
 class CodesDoNotMatch(VerboseException):

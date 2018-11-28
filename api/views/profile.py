@@ -26,14 +26,6 @@ class SignUpView(APIView):
 
         if udid == '':
             raise NoUdid("Нет udid")
-        if country_code == '':
-            raise CountryCodeNotEntered("Не введен код страны")
-        if number == '':
-            raise NumberNotEntered("Не введен номер")
-        if first_name == '':
-            raise FirstNameNotEntered("Не введено имя")
-        if last_name == '':
-            raise LastNameNotEntered("Не введена фамилия")
 
         phone = Phone.objects.get(Q(country_code = country_code) & Q(number = number))
         sms_code_udid = SmsCode.objects.get(phone = phone).udid
