@@ -93,7 +93,7 @@ class OwnProfilePageView(APIView):
     @catch_errors
     def get(self, request, format = None):
         access_key_check(request)
-        token = Token.objects.get(token = request.META.get('HTTP_AUTHORIZATION'))
+        token = Token.objects.get(token = request.META.get('HTTP_AUTHORIZATION')[6:])
         profile = Profile.objects.get(token = token)
         serializer = ProfileSerializer(profile)
         return Response(serializer.data, status = status.HTTP_200_OK)
@@ -101,7 +101,7 @@ class OwnProfilePageView(APIView):
     @catch_errors
     def put(self, request, format = None):
         access_key_check(request)
-        token = Token.objects.get(token = request.META.get('HTTP_AUTHORIZATION'))
+        token = Token.objects.get(token = request.META.get('HTTP_AUTHORIZATION')[6:])
         profile = Profile.objects.filter(token = token)
 
         if 'first_name' in request.data:
