@@ -95,3 +95,35 @@ class ProfilePageView(APIView):
 
         serializer = ProfileSerializer(profile, many = True)
         return Response(serializer.data, status = status.HTTP_200_OK)
+
+
+class OwnProfilePageView(APIView):
+    @catch_errors
+    def get(self, request, format = None):
+        access_key_check(request)
+        token = Token.objects.get(token = request.META.get('HTTP_AUTHORIZATION'))
+        profile = Profile.objects.get(token = token)
+        serializer = ProfileSerializer(profile)
+        return Response(serializer.data, status = status.HTTP_200_OK)
+
+    @catch_errors
+    def put(self, request, format = None):
+        access_key_check(request)
+        token = Token.objects.get(token = request.META.get('HTTP_AUTHORIZATION'))
+        profile = Profile.objects.filter(token = token)
+
+        if 'first_name' in request.data:
+            new_first_name = request.data['first_name']
+            profile.update(first_name = new_first_name)
+
+        if 'last_name' in request.data:
+            new_last_name = request.data['last_name']
+            profile.update(last_name = new_last_name)
+
+        if 'photo' in request.data:
+            new_photo = request.data['photo']
+            if new_photo:
+                profile.update(photo = upload_photo(new_photo, profile.last().phone))
+
+        serializer = ProfileSerializer(profile, many = True)
+        return Response(serializer.data, status = status.HTTP_200_OK)
