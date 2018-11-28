@@ -31,14 +31,3 @@ class Profile(models.Model):
 
     def __str__(self):
         return str(self.external_id) + ") " + self.first_name + " " + self.last_name
-
-    def save(self, *args, **kwargs):
-        if SmsCode.objects.filter(phone = self.phone).count() == 0:
-            sms_code = SmsCode()
-            sms_code.phone = self.phone
-            sms_code.save()
-
-            text = "Проверочный код: " + sms_code.code
-            send_sms(self.phone, text)
-
-        models.Model.save(self, *args, **kwargs)

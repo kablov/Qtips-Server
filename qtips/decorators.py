@@ -39,7 +39,6 @@ def catch_errors(view_func):
             http_code = 409
 
         except Exception as e:
-            print('sssssss')
             reason = 'ServerError'
             description = str(e)
             http_code = 500
