@@ -5,7 +5,8 @@ from .phone import PhoneSerializer
 
 class ProfileSerializer(serializers.HyperlinkedModelSerializer):
     phone = PhoneSerializer()
+    id = serializers.IntegerField(source = 'external_id')
 
     class Meta:
         model = Profile
-        fields = ('external_id', 'phone', 'first_name', 'last_name', 'photo', 'status')
+        fields = ('id', 'phone', 'first_name', 'last_name', 'photo', 'status')
