@@ -25,13 +25,13 @@ class SignUpView(APIView):
         udid = request.data['udid']
 
         if udid == '':
-            raise NoUdid("Нет udid")
+            raise AccessDenied("Нет udid")
 
         phone = Phone.objects.get(Q(country_code = country_code) & Q(number = number))
         sms_code_udid = SmsCode.objects.get(phone = phone).udid
 
         if udid != sms_code_udid:
-            raise UdidsDoNotMatch("udids не совпадают")
+            raise AccessDenied("udids не совпадают")
 
         if Profile.objects.filter(phone = phone).count() == 0:
             profile = Profile()
