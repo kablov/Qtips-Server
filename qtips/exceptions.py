@@ -10,20 +10,20 @@ class VerboseException(Exception):
 
 
 class ProfileEngaged(VerboseException):
-    code = 102
+    code = 101
     verbose_msg = "Аккаунт с указанным номером телефона уже существует"
 
 
 class CodesDoNotMatch(VerboseException):
-    code = 105
+    code = 102
     verbose_msg = "Коды не совпадают"
 
 
 class AccessDenied(VerboseException):
-    code = 108
+    code = 103
     verbose_msg = "Доступ запрещен"
 
 
 class CodeNotSent(VerboseException):
-    code = 109
+    code = 104
     verbose_msg = "Не удалось отправить код подтверждения"
