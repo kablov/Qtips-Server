@@ -43,6 +43,8 @@ class SignUpView(APIView):
             else:
                 profile.photo = ''
             profile.save()
+            profile.payment_url = request.build_absolute_uri()[:-1] + str(profile.external_id)
+            profile.save(update_fields = ['payment_url'])
             token = Token()
             token.profile = profile
             token.save()
