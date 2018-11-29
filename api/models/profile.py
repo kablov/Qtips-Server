@@ -29,7 +29,7 @@ class Profile(models.Model):
     photo = models.TextField("Ссылка на фото", blank = True, null = True)
     status = models.CharField("Статус", max_length = 7, choices = status, default = "pure")
     qr = models.TextField("QR-код", blank = True, null = True)
-    payment_url = models.CharField("URL страницы оплаты", max_length = 50, blank = True)
+    payment_url = models.CharField("URL страницы оплаты", max_length = 45, blank = True)
     balance = models.DecimalField("Баланс", max_digits = 6, decimal_places = 2, default = 0.00)
 
     def __str__(self):
