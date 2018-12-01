@@ -28,3 +28,10 @@ class TokenAdmin(admin.ModelAdmin):
     list_display = ['profile', 'token']
     list_per_page = 20
     ordering = ('id',)
+
+
+@admin.register(Transaction)
+class TransactionAdmin(admin.ModelAdmin):
+    list_display = ['to_user', 'type', 'sum']
+    list_per_page = 20
+    ordering = ('id',)
