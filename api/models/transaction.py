@@ -19,3 +19,13 @@ class Transaction(models.Model):
 
     def __str__(self):
         return str(self.id)
+
+    def update_recipients_balance(self):
+        profile = self.to_user
+        transactions = Transaction.objects.filter(to_user = profile)
+        profile.balance = sum(transaction.amount for transaction in transactions)
+        profile.save(update_fields = ['balance'])
+
+    def save(self, *args, **kwargs):
+        models.Model.save(self, *args, **kwargs)
+        self.update_recipients_balance()
