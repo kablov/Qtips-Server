@@ -11,7 +11,7 @@ class TipPaymentView(APIView):
         transaction = Transaction()
         transaction.to_user = profile
         transaction.type = 'tip_payment'
-        transaction.sum = sum
+        transaction.amount = sum
         transaction.save()
 
         profile.balance += int(sum)

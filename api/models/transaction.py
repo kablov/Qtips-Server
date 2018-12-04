@@ -14,5 +14,5 @@ class Transaction(models.Model):
 	)
 
     to_user = models.ForeignKey(Profile, verbose_name = 'Кому перевод', on_delete = models.DO_NOTHING)
-    sum = models.DecimalField("Сумма перевода", max_digits = 7, decimal_places = 2, default = 0.00)
+    amount = models.DecimalField("Сумма перевода", max_digits = 7, decimal_places = 2, default = 0.00)
     type = models.CharField("Тип транзакции", max_length = 11, choices = type, default = "tip_payment")
