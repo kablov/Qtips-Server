@@ -14,4 +14,5 @@ class BalanceView(APIView):
         is_owner_or_read_only(request, profile)
         transactions = Transaction.objects.filter(to_user = profile)
         profile.balance = sum(transaction.amount for transaction in transactions)
+        profile.save(update_fields = ['balance'])
         return Response(profile.balance, status = status.HTTP_200_OK)
