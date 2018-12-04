@@ -13,7 +13,4 @@ class TipPaymentView(APIView):
         transaction.type = 'tip_payment'
         transaction.amount = amount
         transaction.save()
-
-        profile.balance += int(amount)
-        profile.save(update_fields = ['balance'])
         return Response(status = status.HTTP_201_CREATED)
