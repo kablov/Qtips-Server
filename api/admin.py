@@ -32,6 +32,6 @@ class TokenAdmin(admin.ModelAdmin):
 
 @admin.register(Transaction)
 class TransactionAdmin(admin.ModelAdmin):
-    list_display = ['to_user', 'type', 'amount']
+    list_display = ['to_user', 'type', 'amount', 'time']
     list_per_page = 20
     ordering = ('id',)
