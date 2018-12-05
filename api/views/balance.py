@@ -8,10 +8,10 @@ from qtips.permissions import *
 
 class BalanceView(APIView):
     @catch_errors
-    def get(self, request, id, format = None):
+    def get(self, request, format = None):
         access_key_check(request)
-        profile = Profile.objects.get(external_id = id)
-        is_owner_or_read_only(request, profile)
+        token = Token.objects.get(token = request.META.get('HTTP_AUTHORIZATION')[6:])
+        profile = Profile.objects.get(token = token)
         transactions = Transaction.objects.filter(to_user = profile)
         profile.balance = sum(transaction.amount for transaction in transactions)
         profile.save(update_fields = ['balance'])

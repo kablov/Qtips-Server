@@ -60,39 +60,6 @@ class SignUpView(APIView):
 
 class ProfilePageView(APIView):
     @catch_errors
-    def get(self, request, id, format = None):
-        access_key_check(request)
-        is_user(request)
-        profile = Profile.objects.get(external_id = id)
-        serializer = ProfileSerializer(profile)
-        return Response(serializer.data, status = status.HTTP_200_OK)
-
-    @catch_errors
-    def put(self, request, id, format = None):
-        access_key_check(request)
-        profile = Profile.objects.get(external_id = id)
-        is_owner_or_read_only(request, profile)
-        profile = Profile.objects.filter(external_id = id)
-
-        if 'first_name' in request.data:
-            new_first_name = request.data['first_name']
-            profile.update(first_name = new_first_name)
-
-        if 'last_name' in request.data:
-            new_last_name = request.data['last_name']
-            profile.update(last_name = new_last_name)
-
-        if 'photo' in request.data:
-            new_photo = request.data['photo']
-            if new_photo:
-                profile.update(photo = upload_photo(new_photo, profile.last().phone))
-
-        serializer = ProfileSerializer(profile, many = True)
-        return Response(serializer.data, status = status.HTTP_200_OK)
-
-
-class OwnProfilePageView(APIView):
-    @catch_errors
     def get(self, request, format = None):
         access_key_check(request)
         token = Token.objects.get(token = request.META.get('HTTP_AUTHORIZATION')[6:])
