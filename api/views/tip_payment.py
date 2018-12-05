@@ -2,6 +2,12 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from api.models import *
+from django.shortcuts import render, render_to_response, redirect
+from qtips import settings
+
+def payment_page(request):
+    print(settings.STATIC_ROOT)
+    return render(request, 'tip_payment.html', {})
 
 
 class TipPaymentView(APIView):

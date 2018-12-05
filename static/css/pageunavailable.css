@@ -1,0 +1,81 @@
+header, text {
+	display: block;
+}
+
+.header p1 img {
+	width: 19.5625%;
+	margin-top: 1.7%
+}
+
+.text {
+	margin-top: 12%;
+
+}
+
+.text h1, .text h2 {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 280%;
+	font-weight: lighter;
+}
+
+.text h2 {
+	margin-top: -2%;
+}
+
+
+@media screen and (max-width: 1040px) {
+
+ .header p1 img {
+	 width: 45%;
+	 margin-top: 5%
+ }
+
+	.text, text h1, text h2 {
+	 margin-top: 50%;
+	 font-size: 65%
+	}
+
+	.text h2 {
+	 margin-top: -4%;
+ }
+
+}
+
+
+ @media screen and (max-width: 650px) {
+
+ 	.header p1 img {
+		width: 50%;
+		margin-top: 5%
+	}
+
+   .text, text h1, text h2 {
+		margin-top: 35%;
+		font-size: 80%
+   }
+
+   .text h2 {
+		margin-top: -5%;
+	}
+
+ }
+
+
+ @media screen and (max-width: 480px) {
+
+ 	.header p1 img {
+		width: 50%;
+		margin-top: 5%
+	}
+
+ 	.text, text h1, text h2 {
+		margin-top: 37%;
+		font-size: 52%
+	}
+
+	.text h2 {
+		margin-top: -7%;
+	}
+
+   }
+ }

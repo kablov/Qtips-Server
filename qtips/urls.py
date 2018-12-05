@@ -5,6 +5,7 @@ from api.views import tip_payment
 
 
 urlpatterns = [
+    path('', tip_payment.payment_page),
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
     path('<int:id>/pay/', tip_payment.TipPaymentView.as_view()),
