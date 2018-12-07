@@ -5,8 +5,7 @@ from api.models import *
 from django.shortcuts import render, render_to_response, redirect
 from qtips import settings
 
-def payment_page(request):
-    print(settings.STATIC_ROOT)
+def payment_page(request, id):
     return render(request, 'tip_payment.html', {})
 
 
