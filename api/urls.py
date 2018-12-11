@@ -9,4 +9,5 @@ urlpatterns = [
     path('signup/', profile.SignUpView.as_view()),
     path('profile/me/', profile.ProfilePageView.as_view()),
     path('profile/me/balance/', balance.BalanceView.as_view()),
+    path('profile/me/history/', transaction.TransactionHistoryView.as_view()),
 ]
