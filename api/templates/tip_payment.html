@@ -1,6 +1,7 @@
 <form action="pay/" method="post">
 		{% csrf_token %}
-    <label for="amount"> Введите сумму чаевых: </label>
+    <label for="amount"><center> Введите сумму чаевых: </label>
+		<br>
     <input id="amount" type="text" name="amount" value="{{ amount }}">
-    <input type="submit" value="OK">
+    <input type="submit" value="OK"></center>
 </form>
