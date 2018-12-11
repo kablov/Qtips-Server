@@ -1,5 +1,5 @@
 from django.db import models
-from api.models import *
+from api.models import Profile
 from datetime import datetime
 
 

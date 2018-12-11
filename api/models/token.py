@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.crypto import get_random_string
 from django.core.validators import MinLengthValidator
-from api.models import *
+from api.models import Profile
 import uuid
 
 

@@ -4,12 +4,12 @@ from django.utils.crypto import get_random_string
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from api.models import *
-from api.serializers import *
-from api.content import *
-from qtips.exceptions import *
-from qtips.permissions import *
-from qtips.decorators import *
+from api.models import Profile, Token, Phone, SmsCode
+from api.serializers import ProfileSerializer
+from api.content import upload_photo
+from qtips.decorators import catch_errors
+from qtips.permissions import access_key_check
+from qtips.exceptions import AccessDenied, ProfileEngaged
 import random
 
 

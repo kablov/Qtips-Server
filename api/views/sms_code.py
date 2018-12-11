@@ -2,11 +2,11 @@ from django.db.models import Q
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from api.models import *
-from qtips.exceptions import *
-from qtips.decorators import *
-from qtips.permissions import *
-from api.content import *
+from api.models import Profile, Token, Phone, SmsCode
+from qtips.decorators import catch_errors
+from qtips.permissions import access_key_check
+from qtips.exceptions import AccessDenied, ProfileEngaged
+from api.content import send_sms
 
 
 class RequestCodeView(APIView):

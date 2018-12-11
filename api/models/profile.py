@@ -1,7 +1,6 @@
 from django.db import models
 from django.core.validators import RegexValidator
-from api.models import *
-from api.content import *
+from api.models import Phone
 import random
 
 

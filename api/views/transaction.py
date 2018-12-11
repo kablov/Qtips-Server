@@ -1,8 +1,8 @@
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from api.models import *
-from api.serializers import *
+from api.models import Profile, Token, Transaction
+from api.serializers import TransactionSerializer
 from qtips.decorators import catch_errors
 from qtips.permissions import access_key_check
 
