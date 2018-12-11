@@ -3,7 +3,7 @@ header, text {
 }
 
 .header p1 img {
-	width: 19.5625%;
+	width: 10%;
 	margin-top: 1.7%
 }
 
@@ -26,13 +26,13 @@ header, text {
 @media screen and (max-width: 1040px) {
 
  .header p1 img {
-	 width: 45%;
+	 width: 10%;
 	 margin-top: 5%
  }
 
 	.text, text h1, text h2 {
-	 margin-top: 50%;
-	 font-size: 65%
+	 margin-top: 15%;
+	 font-size: 55%
 	}
 
 	.text h2 {
@@ -45,13 +45,13 @@ header, text {
  @media screen and (max-width: 650px) {
 
  	.header p1 img {
-		width: 50%;
+		width: 12%;
 		margin-top: 5%
 	}
 
    .text, text h1, text h2 {
-		margin-top: 35%;
-		font-size: 80%
+		margin-top: 12%;
+		font-size: 60%
    }
 
    .text h2 {

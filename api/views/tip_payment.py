@@ -2,8 +2,9 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from api.models import *
-from django.shortcuts import render, render_to_response, redirect
+from django.shortcuts import render
 from qtips import settings
+
 
 def payment_page(request, id):
     return render(request, 'tip_payment.html', {})
@@ -18,4 +19,4 @@ class TipPaymentView(APIView):
         transaction.type = 'tip_payment'
         transaction.amount = amount
         transaction.save()
-        return Response(status = status.HTTP_201_CREATED)
+        return render(request, 'successful_payment.html', {})
