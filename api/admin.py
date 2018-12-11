@@ -6,32 +6,32 @@ from api.models import *
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ['external_id', 'phone', 'first_name', 'last_name', 'status', 'balance', 'test_balance']
     list_per_page = 20
-    ordering = ('id',)
+    ordering = ('-id',)
 
 
 @admin.register(Phone)
 class PhoneAdmin(admin.ModelAdmin):
     list_display = ['country_code', 'number', 'is_verified']
     list_per_page = 20
-    ordering = ('id',)
+    ordering = ('-id',)
 
 
 @admin.register(SmsCode)
 class SmsCodeAdmin(admin.ModelAdmin):
     list_display = ['phone', 'udid', 'code']
     list_per_page = 20
-    ordering = ('id',)
+    ordering = ('-id',)
 
 
 @admin.register(Token)
 class TokenAdmin(admin.ModelAdmin):
     list_display = ['profile', 'token']
     list_per_page = 20
-    ordering = ('id',)
+    ordering = ('-id',)
 
 
 @admin.register(Transaction)
 class TransactionAdmin(admin.ModelAdmin):
     list_display = ['to_user', 'type', 'amount', 'time']
     list_per_page = 20
-    ordering = ('id',)
+    ordering = ('-id',)
