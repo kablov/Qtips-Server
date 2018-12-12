@@ -9,4 +9,5 @@ urlpatterns = [
     path('api/', include('api.urls')),
     path('<int:id>/', tip_payment.payment_page),
     path('<int:id>/pay/', tip_payment.TipPaymentView.as_view()),
+    path('<int:id>/', tip_payment.payment_page),
 ]
