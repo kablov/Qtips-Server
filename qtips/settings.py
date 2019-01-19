@@ -12,7 +12,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
-    'qtips-prod.herokuapp.com'
+    'qtips-prod.herokuapp.com',
+    'www.qtips.ru',
+    'qtips.ru'
 ]
 
 
