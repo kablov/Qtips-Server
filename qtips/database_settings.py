@@ -3,10 +3,10 @@ class SecretKeys:
 	DATABASE_PRODUCTION = {
 		'default': {
 			'ENGINE': 'django.db.backends.postgresql_psycopg2',
-			'NAME': 'd6ti9vt884j7vq',
-			'USER': 'avombvvyhcczgj',
-			'PASSWORD': '697be6bb09dde2888ac4ea64f18eb658d0b8e2a398551940c8749eebb930dfc6',
-			'HOST': 'ec2-54-246-85-234.eu-west-1.compute.amazonaws.com',
+			'NAME': 'd4pphab2mh9g8n',
+			'USER': 'kpbtmaogzpoacz',
+			'PASSWORD': 'b1a3d75e99dba704038e0af2e8a636b2ffd89a68e423cd85854df94b677bd84f',
+			'HOST': 'ec2-54-228-248-66.eu-west-1.compute.amazonaws.com',
 			'PORT': '5432',
 		}
 	}
