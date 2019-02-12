@@ -35,3 +35,10 @@ class TransactionAdmin(admin.ModelAdmin):
     list_display = ['to_user', 'type', 'amount', 'time']
     list_per_page = 20
     ordering = ('-id',)
+
+
+@admin.register(WithdrawRequest)
+class WithdrawRequestAdmin(admin.ModelAdmin):
+    list_display = ['profile', 'amount', 'request_date', 'status', 'reviewed_time']
+    list_per_page = 20
+    ordering = ('-id',)
