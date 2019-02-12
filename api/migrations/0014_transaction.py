@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('sum', models.DecimalField(decimal_places=2, default=0.0, max_digits=5, verbose_name='Сумма перевода')),
-                ('type', models.CharField(choices=[('tip_payment', 'Оплата чаевых'), ('withdrawal', 'Снятие со счета')], default='tip_payment', max_length=11, verbose_name='Тип транзакции')),
+                ('type', models.CharField(choices=[('tip_payment', 'Оплата чаевых'), ('withdraw', 'Снятие со счета')], default='tip_payment', max_length=11, verbose_name='Тип транзакции')),
                 ('to_user', models.OneToOneField(on_delete=django.db.models.deletion.DO_NOTHING, to='api.Profile', verbose_name='Кому перевод')),
             ],
             options={

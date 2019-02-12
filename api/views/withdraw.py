@@ -7,7 +7,7 @@ from qtips.decorators import catch_errors
 from qtips.permissions import access_key_check
 
 
-class WithdrawalView(APIView):
+class WithdrawView(APIView):
     @catch_errors
     def post(self, request, format = None):
         access_key_check(request)
@@ -16,7 +16,7 @@ class WithdrawalView(APIView):
         amount = request.data['amount']
         transaction = Transaction()
         transaction.to_user = profile
-        transaction.type = 'withdrawal'
+        transaction.type = 'withdraw'
         transaction.amount = amount
         transaction.save()
         return Response("Заявка на снятие средств отправлена", status = status.HTTP_201_CREATED)
