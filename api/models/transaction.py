@@ -11,7 +11,7 @@ class Transaction(models.Model):
 
     type = (
 	('tip_payment', 'Оплата чаевых'),
-	('withdrawal', 'Снятие со счета'),
+	('withdraw', 'Снятие со счета'),
 	)
 
     to_user = models.ForeignKey(Profile, verbose_name = 'Кому', on_delete = models.DO_NOTHING)
