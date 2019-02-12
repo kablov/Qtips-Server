@@ -11,4 +11,5 @@ urlpatterns = [
     path('profile/me/balance/', balance.BalanceView.as_view()),
     path('profile/me/history/', transaction.TransactionHistoryView.as_view()),
     path('profile/me/withdraw/', withdraw.WithdrawView.as_view()),
+    path('withdraw/requests/', withdraw.WithdrawRequestsView.as_view()),
 ]
