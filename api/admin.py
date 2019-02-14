@@ -4,7 +4,7 @@ from api.models import *
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ['external_id', 'phone', 'first_name', 'last_name', 'status', 'balance', 'test_balance']
+    list_display = ['id', 'external_id', 'phone', 'first_name', 'last_name', 'status', 'balance', 'test_balance']
     list_per_page = 20
     ordering = ('-id',)
 
