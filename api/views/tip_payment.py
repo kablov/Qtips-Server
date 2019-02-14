@@ -19,4 +19,9 @@ class TipPaymentView(APIView):
         transaction.type = 'tip_payment'
         transaction.amount = amount
         transaction.save()
-        return render(request, 'successful_payment.html', {})
+
+        try:
+            devices = profile.fcm_devices.all()
+            devices.send_message(title = "Новые чаевые", body = "Вам отправили чаевые в размере " + str(amount) + " рублей")
+        finally:
+            return render(request, 'successful_payment.html', {})
