@@ -23,6 +23,8 @@ INSTALLED_APPS = [
 
     'rest_framework',
 
+    'fcm_django',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -104,3 +106,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 TWILIO_ACCOUNT_SID = "AC9fc8bf64e0f96d06e254e9962a6f0a6f"
 TWILIO_AUTH_TOKEN = "46d6c4f7b46652dfe1420cd5179bfcd8"
 TWILIO_FROM_NUMBER = "+16148812580"
+
+
+FCM_DJANGO_SETTINGS = {
+        "FCM_SERVER_KEY": "AIzaSyC92ba8g05zw2oR1i4bzuraIRwSB86NxUo",
+}
