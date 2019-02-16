@@ -21,6 +21,7 @@ class SignUpView(APIView):
         number = request.data['number']
         first_name = request.data['first_name']
         last_name = request.data['last_name']
+        email = request.data['email']
         photo = request.data['photo']
         udid = request.data['udid']
 
@@ -38,6 +39,7 @@ class SignUpView(APIView):
             profile.phone = phone
             profile.first_name = first_name
             profile.last_name = last_name
+            profile.email = email
             if photo:
                 profile.photo = upload_photo(photo, phone)
             else:
