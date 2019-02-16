@@ -94,3 +94,17 @@ class ProfilePageView(APIView):
 
         serializer = ProfileSerializer(profile, many = True)
         return Response(serializer.data, status = status.HTTP_200_OK)
+
+
+class SwitchNotificationsView(APIView):
+    @catch_errors
+    def post(self, request, format = None):
+        access_key_check(request)
+        token = Token.objects.get(token = request.META.get('HTTP_AUTHORIZATION')[6:])
+        profile = Profile.objects.get(token = token)
+        are_notifications_enabled = request.data['is_on']
+
+        profile.are_notifications_enabled = are_notifications_enabled
+        profile.save(update_fields = ['are_notifications_enabled'])
+
+        return Response("Настройки уведомлений сохранены", status = status.HTTP_201_CREATED)
