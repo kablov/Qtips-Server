@@ -83,6 +83,10 @@ class ProfilePageView(APIView):
             new_last_name = request.data['last_name']
             profile.update(last_name = new_last_name)
 
+        if 'email' in request.data:
+            new_email = request.data['email']
+            profile.update(email = new_email)
+
         if 'photo' in request.data:
             new_photo = request.data['photo']
             if new_photo:
