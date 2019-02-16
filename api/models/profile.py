@@ -27,6 +27,7 @@ class Profile(models.Model):
     phone = models.OneToOneField(Phone, verbose_name = "Номер телефона", on_delete = models.CASCADE)
     first_name = models.CharField("Имя", max_length = 50)
     last_name = models.CharField("Фамилия", max_length = 50)
+    email = models.EmailField("Email", max_length = 100, blank = True, null = True)
     photo = models.TextField("Ссылка на фото", blank = True, null = True)
     status = models.CharField("Статус", max_length = 7, choices = status, default = "pure")
     qr = models.TextField("QR-код", blank = True, null = True)
