@@ -4,7 +4,6 @@ from .database_settings import SecretKeys
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-ACCESS_KEY = "JBVFDWH9pFp7MKQWfzLdxtLxYka0fZ9j"
 
 SECRET_KEY = 'cyjc9&j)5sj*u^%5b484(+k^0w2yff-si-+1r*-#t1g4f98ugg'
 
@@ -102,7 +101,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-
+ACCESS_KEY = os.environ['ACCESS_KEY']
 TWILIO_ACCOUNT_SID = "AC9fc8bf64e0f96d06e254e9962a6f0a6f"
 TWILIO_AUTH_TOKEN = "46d6c4f7b46652dfe1420cd5179bfcd8"
 TWILIO_FROM_NUMBER = "+16148812580"
