@@ -18,7 +18,7 @@ class WithdrawRequest(models.Model):
     amount = models.DecimalField("Сумма", max_digits = 7, decimal_places = 2, default = 0.00)
     request_date = models.DateTimeField("Дата запроса", default = datetime.now)
     status = models.CharField("Статус", max_length = 8, choices = status, default = "pending")
-    reviewed_time = models.DateTimeField("Время рассмотрения", default = datetime.now)
+    reviewed_time = models.DateTimeField("Время рассмотрения", blank = True, null = True)
 
     def __str__(self):
         return str(self.id)
