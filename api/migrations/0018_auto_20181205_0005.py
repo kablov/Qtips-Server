@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
         ),
         migrations.AlterField(
             model_name='transaction',
-            name='recipient',
+            name='to_user',
             field=models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='api.Profile', verbose_name='Кому'),
         ),
     ]

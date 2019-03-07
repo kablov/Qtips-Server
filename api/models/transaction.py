@@ -14,7 +14,7 @@ class Transaction(models.Model):
 	('withdraw', 'Снятие со счета'),
 	)
 
-    recipient = models.ForeignKey(Profile, verbose_name = 'Кому', on_delete = models.DO_NOTHING)
+    to_user = models.ForeignKey(Profile, verbose_name = 'Кому', on_delete = models.DO_NOTHING)
     amount = models.DecimalField("Сумма", max_digits = 7, decimal_places = 2, default = 0.00)
     time = models.DateTimeField("Время", default = datetime.now)
     type = models.CharField("Тип транзакции", max_length = 11, choices = type, default = "tip_payment")
@@ -22,12 +22,12 @@ class Transaction(models.Model):
     def __str__(self):
         return str(self.id)
 
-    def update_recipient_balance(self):
-        profile = self.recipient
-        transactions = Transaction.objects.filter(recipient = profile)
+    def update_recipients_balance(self):
+        profile = self.to_user
+        transactions = Transaction.objects.filter(to_user = profile)
         profile.balance = sum(transaction.amount for transaction in transactions)
         profile.save(update_fields = ['balance'])
 
     def save(self, *args, **kwargs):
         models.Model.save(self, *args, **kwargs)
-        self.update_recipient_balance()
+        self.update_recipients_balance()

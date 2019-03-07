@@ -16,7 +16,7 @@ class WithdrawView(APIView):
         profile = Profile.objects.get(token = token)
         amount = request.data['amount']
         transaction = Transaction()
-        transaction.recipient = profile
+        transaction.to_user = profile
         transaction.type = 'withdraw'
         transaction.amount = amount
         transaction.save()

@@ -12,7 +12,7 @@ class BalanceView(APIView):
         access_key_check(request)
         token = Token.objects.get(token = request.META.get('HTTP_AUTHORIZATION')[6:])
         profile = Profile.objects.get(token = token)
-        transactions = Transaction.objects.filter(recipient = profile)
+        transactions = Transaction.objects.filter(to_user = profile)
         profile.balance = sum(transaction.amount for transaction in transactions)
         profile.save(update_fields = ['balance'])
         return Response(profile.balance, status = status.HTTP_200_OK)
