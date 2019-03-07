@@ -9,7 +9,7 @@ class FCMTokenView(APIView):
     def post(self, request, format = None):
          profile_id = request.data['profile_id']
          uuid = request.data['uuid']
-         token = request.data['token']
+         token = request.data['FCM_token']
          profile = Profile.objects.get(id = profile_id)
 
          device_with_this_token = FCMDevice.objects.filter(registration_id = token).first()
@@ -45,8 +45,6 @@ class FCMTokenView(APIView):
 class DeleteDeviceIfLogoutView(APIView):
     def post(self, request, format = None):
         uuid = request.data['uuid']
-        profile_id = request.data['profile_id']
-        profile = Profile.objects.get(id = profile_id)
 
         device = FCMDevice.objects.get(device_id = uuid)
         device.delete()
