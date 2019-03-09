@@ -14,7 +14,7 @@ class TipPaymentView(APIView):
         profile = Profile.objects.get(external_id = id)
         amount = request.data['amount']
         transaction = Transaction()
-        transaction.to_user = profile
+        transaction.recipient = profile
         transaction.type = 'tip_payment'
         transaction.amount = amount
         transaction.save()
