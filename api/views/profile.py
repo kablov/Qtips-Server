@@ -6,11 +6,13 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from api.models import Profile, Token, Phone, SmsCode
 from api.serializers import ProfileSerializer
-from api.content import upload_photo
+from api.content import upload_photo, upload_qr
+from qtips import settings
 from qtips.decorators import catch_errors
 from qtips.permissions import access_key_check
 from qtips.exceptions import AccessDenied, ProfileEngaged
 import random
+import requests
 
 
 class SignUpView(APIView):
@@ -46,10 +48,13 @@ class SignUpView(APIView):
                 profile.photo = ''
             profile.save()
             profile.payment_url = request.META['HTTP_HOST'] + "/" + str(profile.external_id)
-            profile.save(update_fields = ['payment_url'])
+            qr = requests.get('https://api.scanova.io/v2/qrcode/url' + '?url=' + profile.payment_url + '&apikey=' + settings.SCANOVA_API_KEY)
+            profile.qr = upload_qr(qr.content, phone)
+            profile.save(update_fields = ['payment_url', 'qr'])
             token = Token()
             token.profile = profile
             token.save()
+
         else:
             raise ProfileEngaged("Аккаунт с указанным номером телефона уже существует")
 
