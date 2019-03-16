@@ -21,6 +21,26 @@ class TipPaymentView(APIView):
 
         try:
             devices = profile.fcm_devices.all()
-            devices.send_message(title = "Поступили чаевые", body = "Вам отправили чаевые в размере " + str(amount) + " рублей.", sound = 'cash.wav')
+            devices.send_message(message = {"title": "Поступили чаевые", "body": "Вам отправили чаевые в размере " + str(amount) + " рублей."},  extra = {"category" : "TIP_PAYMENT"})
+        finally:
+            return render(request, 'successful_payment.html', {})
+
+
+def test_payment_page(request):
+    return render(request, 'tip_payment.html', {})
+
+class TestTipPaymentView(APIView):
+    def post(self, request, format = None):
+        profile = Profile.objects.get(external_id = 836875)
+        amount = request.data['amount']
+        transaction = Transaction()
+        transaction.recipient = profile
+        transaction.type = 'tip_payment'
+        transaction.amount = amount
+        transaction.save()
+
+        try:
+            devices = profile.fcm_devices.all()
+            devices.send_message(message = {"title": "Поступили чаевые", "body": "Вам отправили чаевые в размере " + str(amount) + " рублей."},  extra = {"category" : "TIP_PAYMENT"})
         finally:
             return render(request, 'successful_payment.html', {})
