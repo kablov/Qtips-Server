@@ -36,8 +36,6 @@ class Profile(models.Model):
     test_balance = models.DecimalField("Тестовый баланс", max_digits = 8, decimal_places = 2, default = 0.00)
     are_notifications_enabled = models.BooleanField("Уведомления включены?", default = False)
     fcm_devices = models.ManyToManyField(FCMDevice, verbose_name = 'Устройства', blank = True)
-    cp_transaction_id = models.CharField("id транзакции в cloudpayments", max_length = 50, blank = True)
-    sa_transaction_id = models.CharField("id транзакции в нашем банке", max_length = 50, blank = True)
 
     def __str__(self):
         return str(self.external_id) + ") " + self.first_name + " " + self.last_name

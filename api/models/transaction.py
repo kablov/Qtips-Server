@@ -17,8 +17,8 @@ class Transaction(models.Model):
     amount = models.DecimalField("Сумма", max_digits = 7, decimal_places = 2, default = 0.00)
     time = models.DateTimeField("Время", default = datetime.now)
     type = models.CharField("Тип транзакции", max_length = 11, choices = type, default = "tip_payment")
-    #cp_transaction_id = models.CharField("id транзакции cloudpayments", max_length = 15)
-    #sa_transaction_id = models.CharField("id транзакции нашего банка", max_length = 15)
+    cp_transaction_id = models.CharField("id транзакции в cloudpayments", max_length = 50, blank = True)
+    sa_transaction_id = models.CharField("id транзакции в нашем банке", max_length = 50, blank = True)
 
     def __str__(self):
         return str(self.id)
