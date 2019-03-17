@@ -31,7 +31,7 @@ def test_payment_page(request):
 
 class TestTipPaymentView(APIView):
     def post(self, request, format = None):
-        profile = Profile.objects.get(external_id = 836875)
+        profile = Profile.objects.get(external_id = 398466)
         amount = request.data['amount']
         transaction = Transaction()
         transaction.recipient = profile
