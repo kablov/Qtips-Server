@@ -3,6 +3,7 @@ from api.models import Transaction
 
 
 class TransactionSerializer(serializers.HyperlinkedModelSerializer):
+    time = serializers.DateTimeField(format=("%Y-%m-%d %H:%M:%S.%f%z"))
     class Meta:
         model = Transaction
         fields = ('id', 'amount', 'time', 'type')
