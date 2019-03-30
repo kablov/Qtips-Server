@@ -1,5 +1,5 @@
 from fcm_django.models import FCMDevice
-from api.models import Profile
+from api.models import Profile, Token
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -10,7 +10,7 @@ class FCMTokenView(APIView):
          token = Token.objects.get(token = request.META.get('HTTP_AUTHORIZATION')[6:])
          profile = Profile.objects.get(token = token)
          uuid = request.data['uuid']
-         token = request.data['FCM_token']
+         token = request.data['fcm_token']
 
          device_with_this_token = FCMDevice.objects.filter(registration_id = token).first()
          device_with_this_uuid = FCMDevice.objects.filter(device_id = uuid).first()
