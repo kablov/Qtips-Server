@@ -21,7 +21,7 @@ class TipPaymentView(APIView):
 
         try:
             devices = profile.fcm_devices.all()
-            devices.send_message(title = "Поступили чаевые", body = "Вам отправили чаевые в размере " + str(amount) + " рублей.", sound = 'cash.wav')
+            devices.send_message(title = "Поступили чаевые", body = "Вам отправили чаевые в размере " + str(amount) + " рублей.", sound = 'cash.wav', content_available = True, data={"category": "NEW_TIPS"})
         finally:
             return render(request, 'successful_payment.html', {})
 
