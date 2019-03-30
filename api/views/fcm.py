@@ -7,10 +7,10 @@ from rest_framework.response import Response
 
 class FCMTokenView(APIView):
     def post(self, request, format = None):
-         profile_id = request.data['profile_id']
+         token = Token.objects.get(token = request.META.get('HTTP_AUTHORIZATION')[6:])
+         profile = Profile.objects.get(token = token)
          uuid = request.data['uuid']
          token = request.data['FCM_token']
-         profile = Profile.objects.get(id = profile_id)
 
          device_with_this_token = FCMDevice.objects.filter(registration_id = token).first()
          device_with_this_uuid = FCMDevice.objects.filter(device_id = uuid).first()
