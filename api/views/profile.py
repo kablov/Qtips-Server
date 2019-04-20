@@ -97,7 +97,8 @@ class ProfilePageView(APIView):
             if new_photo:
                 profile.update(photo = upload_photo(new_photo, profile.last().phone))
 
-        serializer = ProfileSerializer(profile, many = True)
+        profile = Profile.objects.get(token = token)
+        serializer = ProfileSerializer(profile)
         return Response(serializer.data, status = status.HTTP_200_OK)
 
 
