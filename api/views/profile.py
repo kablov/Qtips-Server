@@ -24,7 +24,10 @@ class SignUpView(APIView):
         first_name = request.data['first_name']
         last_name = request.data['last_name']
         email = request.data['email']
-        photo = request.data['photo']
+        if 'photo' in request.FILES:
+            photo = request.data['photo']
+        else:
+            photo = ''
         udid = request.data['udid']
 
         if udid == '':
