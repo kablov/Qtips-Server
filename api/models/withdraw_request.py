@@ -14,7 +14,7 @@ class WithdrawRequest(models.Model):
     ('declined', 'Отказано')
 	)
 
-    profile = models.ForeignKey(Profile, verbose_name = "Профиль", on_delete = models.DO_NOTHING)
+    profile = models.ForeignKey(Profile, verbose_name = "Профиль", on_delete = models.CASCADE)
     amount = models.DecimalField("Сумма", max_digits = 7, decimal_places = 2, default = 0.00)
     request_date = models.DateTimeField("Дата запроса", default = datetime.now)
     status = models.CharField("Статус", max_length = 8, choices = status, default = "pending")

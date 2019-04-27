@@ -13,7 +13,7 @@ class Transaction(models.Model):
 	('withdraw', 'Снятие со счета'),
 	)
 
-    recipient = models.ForeignKey(Profile, verbose_name = 'Кому', on_delete = models.DO_NOTHING)
+    recipient = models.ForeignKey(Profile, verbose_name = 'Кому', on_delete = models.CASCADE)
     amount = models.DecimalField("Сумма", max_digits = 7, decimal_places = 2, default = 0.00)
     time = models.DateTimeField("Время", default = datetime.now)
     type = models.CharField("Тип транзакции", max_length = 11, choices = type, default = "tip_payment")
