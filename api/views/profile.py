@@ -49,7 +49,7 @@ class SignUpView(APIView):
                 profile.photo = upload_photo(photo, phone)
             else:
                 profile.photo = ''
-            profile.payment_url = request.META['HTTP_HOST'] + "/" + str(profile.external_id)
+            profile.payment_url = request.META['HTTP_HOST'][4:] + "/" + str(profile.external_id)
             qr = requests.get('https://api.scanova.io/v2/qrcode/url' + '?url=' + profile.payment_url + '&apikey=' + settings.SCANOVA_API_KEY)
             profile.qr = upload_qr(qr.content, phone)
             profile.save()
