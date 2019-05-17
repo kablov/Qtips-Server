@@ -53,7 +53,7 @@ class SignUpView(APIView):
             if host.startswith('www.'):
                 host = host[4:]
             profile.payment_url = host + "/" + str(profile.external_id)
-            qr = requests.get('https://api.scanova.io/v2/qrcode/url' + '?url=' + profile.payment_url + '&apikey=' + settings.SCANOVA_API_KEY + '&size=xxl')
+            qr = requests.get('https://api.scanova.io/v2/qrcode/url' + '?url=' + profile.payment_url + '&apikey=' + settings.SCANOVA_API_KEY)
             profile.qr = upload_qr(qr.content, phone)
             profile.save()
 
