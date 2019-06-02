@@ -1,4 +1,5 @@
 {% load staticfiles %}
+<link rel="stylesheet" href="{% static 'css/Shared/_Layout.css' %}">
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,7 +30,8 @@
 <body>
     <div>
         <div id="pg">
-            @RenderBody()
+          {% block content %}
+          {% endblock %}
         </div>
         <footer id="footer">
 			<img src="{% static 'images/Shared/_Layout/wave.png' %}" />
