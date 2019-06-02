@@ -6,9 +6,6 @@ from django.shortcuts import render
 def mainpage(request):
 	return render(request, 'i/Index.html', {})
 
-def error(request):
-	return render(request, 'Error/Index.html', {})
-
 def thanks(request):
 	return render(request, 'thanks/Index.html', {})
 
@@ -20,3 +17,8 @@ def terms(request):
 
 def privacy(request):
 	return render(request, 'privacy/Index.html', {})
+
+def error(request):
+	response = render(request, 'Error/Index.html', {})
+	response.status_code = 404
+	return response

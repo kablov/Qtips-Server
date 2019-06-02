@@ -3,7 +3,10 @@ from django.urls import path, include
 import api
 from api.views import tip_payment, web
 
+
 handler404 = 'api.views.web.error'
+handler500 = 'api.views.web.error'
+
 
 urlpatterns = [
     path('', web.mainpage),
