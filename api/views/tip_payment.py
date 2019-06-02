@@ -2,7 +2,7 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from api.models import Profile, Transaction
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 
 def payment_page(request, id):
@@ -23,7 +23,8 @@ class TipPaymentView(APIView):
             devices = profile.fcm_devices.all()
             devices.send_message(title = "Поступили чаевые", body = "Вам отправили чаевые в размере " + str(amount) + " рублей.", sound = 'cash.wav', content_available = True, data={"category": "NEW_TIPS"})
         finally:
-            return render(request, 'successful_payment.html', {})
+            link = 'http://' + request.META['HTTP_HOST'] + '/thanks'
+            return redirect(link)
 
 
 def test_payment_page(request):

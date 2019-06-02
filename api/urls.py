@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path
 from api.views import *
 
+handler404 = 'api.views.web.error'
 
 urlpatterns = [
     path('code/request/', sms_code.RequestCodeView.as_view()),

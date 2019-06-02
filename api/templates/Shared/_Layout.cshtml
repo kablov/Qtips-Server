@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="x-rim-auto-match" content="none">
+    <link rel="shortcut icon" href="@ViewBag._Layout_m.img">
+
+    <!-- SEO -->
+    <meta name="robots" content="@ViewBag._Layout_m.robots" />
+    <title>@ViewBag._Layout_m.title</title>
+    <meta name="description" content="@ViewBag._Layout_m.description" />
+    <meta property="og:title" content="@ViewBag._Layout_m.title" />
+    <meta property="og:description" content="@ViewBag._Layout_m.description" />
+    <meta property="og:image" content="@ViewBag._Layout_m.img" />
+
+    <!-- css -->
+    <link rel="stylesheet" href='/css/Shared/_Layout.css' />
+    <link rel="stylesheet" href="/css/i.css" />
+    <link rel="stylesheet" href='@String.Format("/css/{0}.css", ViewBag._Layout_m.ca)' />
+
+    <!-- js -->
+    <script src="~/js_lib/jquery-3.3.1.min.js"></script>
+    <script src='@String.Format("/js/{0}.js", ViewBag._Layout_m.ca)'></script>
+</head>
+<body>
+    <div>
+        <div id="pg">
+            @RenderBody()
+        </div>
+        <footer id="footer">
+			<img src="/cnt/Shared/_Layout/wave.png" />
+				<ul>
+					<li>
+						<h4>
+							Qtips
+						</h4>
+						<p>
+							Чаевые 21 века
+						</p>
+					</li>
+					<li>
+						<h4>
+							Навигация
+						</h4>
+                        <p>
+                            <a href="/">
+                                Главная
+                            </a>
+                        </p>
+                        <p>
+                            <a href="/#x">
+                                Преимущества
+                            </a>
+                        </p>
+					</li>
+					<li>
+						<h4>
+							О компании
+						</h4>
+                        <p>
+                            <a href="/privacy">
+                                Политика конфиденциальности
+                            </a>
+                        </p>
+                        <p>
+                            <a href="/terms">
+                                Правила использования
+                            </a>
+                        </p>
+					</li>
+					<li>
+						<h4>
+							Контакты
+						</h4>
+                        <p>
+                            <a>
+                                support@qtips.ru
+                            </a>
+                        </p>
+                        <p>
+                            <a>
+                                +7(963) 929-03-99
+                            </a>
+                        </p>
+                        <p>
+                            <a>
+                                ул. Маршала Прошляков, д.13
+                            </a>
+                        </p>
+					</li>
+				</ul>
+        </footer>
+		<div id="footer_sub">
+			<a href="/">
+				Перейти на главную
+			</a>
+		</div>
+    </div>
+</body>
+</html>
