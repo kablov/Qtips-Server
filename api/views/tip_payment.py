@@ -4,10 +4,11 @@ from rest_framework.response import Response
 from api.models import Profile, Transaction
 from django.shortcuts import render, redirect
 
+def new_payment_page(request, id):
+    return render(request, 'payment/Index.html', {})
 
 def payment_page(request, id):
     return render(request, 'tip_payment.html', {})
-
 
 class TipPaymentView(APIView):
     def post(self, request, id, format = None):
