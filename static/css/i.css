@@ -495,7 +495,7 @@
             }
 
                 .uli li > *:first-child > img {
-                    content: url("{% static 'images/i/credit-card-icon.png' %}");
+                    content: url("/static/images/i/credit-card-icon.png");
                     height: 19px;
                     margin-top: 20px;
                 }
