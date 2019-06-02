@@ -1,0 +1,31 @@
+﻿body {
+    background: #f17959;
+}
+
+.text {
+    background: #f17959
+}
+
+    .text > *:nth-child(3) {
+        text-align: center;
+    }
+
+        .text > *:nth-child(3) img {
+            max-width: 280px;
+            margin-bottom: 50px;
+        }
+
+@media only screen and (max-width: 600px) {
+    .text > *:nth-child(3) img {
+        max-width:160px;
+        width: 80%;
+    }
+}
+
+#footer {
+    display: none;
+}
+
+#footer_sub {
+    display: unset;
+}

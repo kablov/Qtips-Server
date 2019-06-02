@@ -1,0 +1,15 @@
+﻿body {
+    background: #f17959;
+}
+
+.text {
+    background: #f17959
+}
+
+#footer {
+    display: none;
+}
+
+#footer_sub {
+    display: unset;
+}
