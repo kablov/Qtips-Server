@@ -22,7 +22,8 @@
                     Номер: 453 231
                 </p>
 		</div>
-        <form id="cost">
+        <form id="cost" action="pay/" method="post">
+					{% csrf_token %}
                 <h3>
 					<div></div> Сколько хотите оставить?
                 </h3>
@@ -46,7 +47,7 @@
                 <p>
                     или укажите сумму
                 </p>
-                <input id="py" type="text" placeholder="100 P." />
+                <input id="py" type="text" placeholder="100 P." value="{{ amount }}" />
                 <h3>
                     <div></div>Прислать чек на почту или телефон:
                 </h3>
