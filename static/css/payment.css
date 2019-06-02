@@ -1,4 +1,5 @@
-﻿body {
+{% load staticfiles %}
+body {
     background: #f17959;
 }
 
@@ -153,9 +154,9 @@
     background: #fff;
     height: 11px;
 }
-        
-        
-        
+
+
+
         #pay form > p {
             float: left;
             width: 100%;
@@ -177,7 +178,7 @@
         #pay form > #py::-webkit-input-placeholder {
             color:#fff;
         }
-        
+
         #pay form > input[type="tel"] {
             width: 200px;
             border: none;
@@ -356,7 +357,7 @@
 }*/
 
 #footer img {
-    content:url(/cnt/payment/wave_white.png)
+    content:url({% static 'images/payment/apps.png' %})
     /*moz-transform: scale(-1, -1);
     -o-transform: scale(-1, -1);
     -webkit-transform: scale(-1, -1);
