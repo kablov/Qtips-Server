@@ -1,5 +1,4 @@
 {% load staticfiles %}
-<link rel="stylesheet" href="{% static 'css/Shared/_Layout.css' %}">
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,8 +18,8 @@
     <meta property="og:image" content="@ViewBag._Layout_m.img" />
 
     <!-- css -->
-    <link rel="stylesheet" href='/css/Shared/_Layout.css' />
-    <link rel="stylesheet" href="/css/i.css" />
+    <link rel="stylesheet" href="{% static 'css/Shared/_Layout.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/i.css' %}" />
     <link rel="stylesheet" href='@String.Format("/css/{0}.css", ViewBag._Layout_m.ca)' />
 
     <!-- js -->
