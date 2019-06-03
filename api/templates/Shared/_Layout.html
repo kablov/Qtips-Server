@@ -23,8 +23,8 @@
     <link rel="stylesheet" href='@String.Format("/css/{0}.css", ViewBag._Layout_m.ca)' />
 
     <!-- js -->
-    <script src="~/js_lib/jquery-3.3.1.min.js"></script>
-    <script src='@String.Format("/js/{0}.js", ViewBag._Layout_m.ca)'></script>
+    <script src="{% static 'js_lib/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/payment.js' %}"></script>
 </head>
 <body>
     <div>
