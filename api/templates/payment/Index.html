@@ -13,13 +13,13 @@
                     Сотрудник
                 </h3>
 				<div>
-					<img src="{% static 'images/payment/www.jpeg' %}" />
+					<img src="{{ profile.photo }}" />
 				</div>
                 <p>
-                    Анастасия И.
+                    {{ profile.first_name }} {{ profile.last_name }}
                 </p>
                 <p>
-                    Номер: 453 231
+                    Номер: {{ profile.external_id }}
                 </p>
 		</div>
         <form id="cost" action="pay/" method="post">

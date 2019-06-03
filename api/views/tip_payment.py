@@ -5,7 +5,8 @@ from api.models import Profile, Transaction
 from django.shortcuts import render, redirect
 
 def new_payment_page(request, id):
-    return render(request, 'payment/Index.html', {})
+    profile = Profile.objects.get(external_id = id)
+    return render(request, 'payment/Index.html', { "profile" : profile })
 
 def payment_page(request, id):
     return render(request, 'tip_payment.html', {})
