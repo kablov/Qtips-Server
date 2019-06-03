@@ -2,6 +2,7 @@
 
 {% block content %}
 {% load staticfiles %}
+{% csrf_token %}
 <link rel="stylesheet" href="{% static 'css/payment.css' %}">
 <div>
 	<p id="h1">
