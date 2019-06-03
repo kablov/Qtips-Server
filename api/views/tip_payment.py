@@ -4,12 +4,10 @@ from rest_framework.response import Response
 from api.models import Profile, Transaction
 from django.shortcuts import render, redirect
 
-def new_payment_page(request, id):
-    profile = Profile.objects.get(external_id = id)
-    return render(request, 'payment/Index.html', { "profile" : profile })
 
 def payment_page(request, id):
-    return render(request, 'tip_payment.html', {})
+    profile = Profile.objects.get(external_id = id)
+    return render(request, 'payment/Index.html', { "profile" : profile })
 
 class TipPaymentView(APIView):
     def post(self, request, id, format = None):
@@ -30,11 +28,12 @@ class TipPaymentView(APIView):
 
 
 def test_payment_page(request):
-    return render(request, 'tip_payment.html', {})
+    profile = Profile.objects.get(external_id = 404490)
+    return render(request, 'payment/Index.html', { "profile" : profile })
 
 class TestTipPaymentView(APIView):
     def post(self, request, format = None):
-        profile = Profile.objects.get(external_id = 398466)
+        profile = Profile.objects.get(external_id = 404490)
         amount = request.data['amount']
         transaction = Transaction()
         transaction.recipient = profile
@@ -46,4 +45,5 @@ class TestTipPaymentView(APIView):
             devices = profile.fcm_devices.all()
             devices.send_message(message = {"title": "Поступили чаевые", "body": "Вам отправили чаевые в размере " + str(amount) + " рублей."},  extra = {"category" : "TIP_PAYMENT"})
         finally:
-            return render(request, 'successful_payment.html', {})
+            link = 'http://' + request.META['HTTP_HOST'] + '/thanks'
+            return redirect(link)
