@@ -1,3 +1,6 @@
+{% extends 'Shared/_Layout.html' %}
+
+{% block content %}
 {% load staticfiles %}
 <link rel="stylesheet" href="{% static 'css/thanks.css' %}">
 <div class="text">
@@ -11,3 +14,4 @@
         <img src="{% static 'images/thanks/emo.png' %}" />
     </div>
 </div>
+{% endblock %}
