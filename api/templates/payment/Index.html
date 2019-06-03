@@ -2,7 +2,6 @@
 
 {% block content %}
 {% load staticfiles %}
-{% csrf_token %}
 <link rel="stylesheet" href="{% static 'css/payment.css' %}">
 <div>
 	<p id="h1">
@@ -27,6 +26,7 @@
                 </p>
 		</div>
         <form id="cost" action="pay/" method="post">
+
                 <h3>
 					<div></div> Сколько хотите оставить?
                 </h3>
@@ -54,6 +54,7 @@
                 <h3>
                     <div></div>Прислать чек на почту или телефон:
                 </h3>
+								{% csrf_token %}
                 <input type="tel" placeholder="Телефон" />
                 <input type="email" placeholder="E-mail" />
                 <input type="submit" value="Оплатить" />
