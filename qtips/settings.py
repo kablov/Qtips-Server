@@ -8,7 +8,7 @@ ACCESS_KEY = os.environ['ACCESS_KEY']
 
 SECRET_KEY = 'cyjc9&j)5sj*u^%5b484(+k^0w2yff-si-+1r*-#t1g4f98ugg'
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
