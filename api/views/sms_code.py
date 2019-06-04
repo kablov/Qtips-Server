@@ -26,7 +26,7 @@ class RequestCodeView(APIView):
             sms_code.save()
 
             full_phone_number = str(country_code) + str(number)
-            text = "Проверочный код: " + sms_code.code
+            text = "Проверочный код для Qtips: " + sms_code.code
             try:
                 send_sms(full_phone_number, text)
             except:
