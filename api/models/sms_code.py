@@ -6,8 +6,8 @@ from api.models import Phone
 
 class SmsCode(models.Model):
     class Meta:
-        verbose_name = 'Код'
-        verbose_name_plural = 'Коды'
+        verbose_name = 'Код подтверждения'
+        verbose_name_plural = 'Коды подтверждения'
 
     def get_new_code():
         return get_random_string(length = 4, allowed_chars = '1234567890')
