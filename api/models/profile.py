@@ -23,7 +23,7 @@ class Profile(models.Model):
 	('banned', 'Забанен'),
 	)
 
-    external_id = models.IntegerField(validators=[RegexValidator(r'^\d{6}$')], unique = True, default = get_new_external_id)
+    external_id = models.IntegerField("Код сотрудника", validators=[RegexValidator(r'^\d{6}$')], unique = True, default = get_new_external_id)
     phone = models.OneToOneField(Phone, verbose_name = "Номер телефона", on_delete = models.CASCADE)
     first_name = models.CharField("Имя", max_length = 50)
     last_name = models.CharField("Фамилия", max_length = 50)
