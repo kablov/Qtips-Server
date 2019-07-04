@@ -6,7 +6,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 ACCESS_KEY = os.environ['ACCESS_KEY']
 
-SECRET_KEY = 'cyjc9&j)5sj*u^%5b484(+k^0w2yff-si-+1r*-#t1g4f98ugg'
+SECRET_KEY = os.environ['SECRET_KEY']
 
 DEBUG = False
 
@@ -108,8 +108,10 @@ TWILIO_AUTH_TOKEN = os.environ['TWILIO_AUTH_TOKEN']
 TWILIO_FROM_NUMBER = os.environ['TWILIO_FROM_NUMBER']
 
 
+FCM_SERVER_KEY = os.environ['FCM_SERVER_KEY']
+
 FCM_DJANGO_SETTINGS = {
-        "FCM_SERVER_KEY": "AAAAoKc7x6c:APA91bHwC4sVm20u5yuWLdxCMpSBwZlqnB01Bd-_uRa7otsIQz-7glPldMOYjQa56HzBhGkdBxKcwy4FgEIwKjnm0a3Oi1afC4dK0my1kxxivVzfW4cOv5_w8KJV_Zi-tltL2pWlg63C",
+        "FCM_SERVER_KEY": FCM_SERVER_KEY,
 }
 
 
