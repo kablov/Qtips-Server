@@ -7,7 +7,6 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'qtips.settings')
 app = Celery('qtips')
 app.config_from_object('django.conf:settings')
 
-# Load task modules from all registered Django app configs.
 app.autodiscover_tasks()
 
 @app.task(bind=True)
@@ -17,6 +16,6 @@ def debug_task(self):
 app.conf.beat_schedule = {
     'send-balance-info': {
         'task': 'api.tasks.send_balance_info',
-        'schedule': 30,  # change to `crontab(minute=0, hour=0)` if you want it to run daily at midnight
+        'schedule': crontab(minute=0, hour=0),
     },
 }
