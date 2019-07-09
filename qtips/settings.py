@@ -116,3 +116,15 @@ FCM_DJANGO_SETTINGS = {
 
 
 SCANOVA_API_KEY = os.environ['SCANOVA_API_KEY']
+
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'maxim.kablov@gmail.com'
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
+EMAIL_PORT = 587
+
+
+BROKER_URL = os.environ['REDIS_URL']
+CELERY_RESULT_BACKEND = os.environ['REDIS_URL']
+BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
