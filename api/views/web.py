@@ -18,7 +18,8 @@ def terms(request):
 def privacy(request):
 	return render(request, 'privacy/Index.html', {})
 
-def error(request):
-	response = render(request, 'Error/Index.html', {})
-	response.status_code = 404
-	return response
+def error_404_view(request, exception):
+	return render(request, 'Error/Index.html', {})
+
+def error_500_view(request):
+	return render(request, 'Error/Index.html', {})
