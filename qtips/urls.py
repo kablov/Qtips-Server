@@ -4,8 +4,8 @@ import api
 from api.views import tip_payment, web
 
 
-handler404 = 'api.views.web.error'
-handler500 = 'api.views.web.error'
+handler404 = 'api.views.web.error_404_view'
+handler500 = 'api.views.web.error_500_view'
 
 
 urlpatterns = [
