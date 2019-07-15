@@ -1,6 +1,5 @@
 from django.contrib import admin
 from django.urls import path, include
-import api
 from api.views import tip_payment, web
 
 

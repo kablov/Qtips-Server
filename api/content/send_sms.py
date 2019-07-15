@@ -9,7 +9,7 @@ def send_sms(phone, text):
     client = Client(account_sid, auth_token)
 
     client.messages.create(
-        to = phone,
-        from_ = settings.TWILIO_FROM_NUMBER,
-        body = text
+        to=phone,
+        from_=settings.TWILIO_FROM_NUMBER,
+        body=text
     )

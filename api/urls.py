@@ -1,6 +1,5 @@
-from django.contrib import admin
 from django.urls import path
-from api.views import sms_code, profile, balance, transaction, withdraw, fcm, web
+from api.views import sms_code, profile, balance, transaction, withdraw, fcm
 
 
 urlpatterns = [

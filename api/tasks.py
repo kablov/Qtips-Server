@@ -5,7 +5,7 @@ from api.models import Profile
 
 @app.task
 def send_balance_info():
-    profile = Profile.objects.get(external_id = 538660)
+    profile = Profile.objects.get(external_id=538660)
     send_mail(
         'Данные о балансе в Qtips',
         'Баланс на вашем счете в Qtips составляет ' + str(profile.balance) + ' рублей.',
