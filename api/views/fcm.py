@@ -7,22 +7,22 @@ from api.models import Profile, Token
 
 class FCMTokenView(APIView):
     def post(self, request, format=None):
-         token = Token.objects.get(token=request.META.get('HTTP_AUTHORIZATION')[6:])
-         profile = Profile.objects.get(token=token)
-         uuid = request.data['uuid']
-         token = request.data['fcm_token']
+        token = Token.objects.get(token=request.META.get('HTTP_AUTHORIZATION')[6:])
+        profile = Profile.objects.get(token=token)
+        uuid = request.data['uuid']
+        token = request.data['fcm_token']
 
-         device_with_this_token = FCMDevice.objects.filter(registration_id=token).first()
-         device_with_this_uuid = FCMDevice.objects.filter(device_id=uuid).first()
+        device_with_this_token = FCMDevice.objects.filter(registration_id=token).first()
+        device_with_this_uuid = FCMDevice.objects.filter(device_id=uuid).first()
 
-         if not device_with_this_token and not device_with_this_uuid:
-             new_device = FCMDevice()
-             new_device.device_id = uuid
-             new_device.registration_id = token
-             new_device.save()
-             profile.fcm_devices.add(new_device)
-             profile.save()
-             print("Создан новый девайс")
+        if not device_with_this_token and not device_with_this_uuid:
+            new_device = FCMDevice()
+            new_device.device_id = uuid
+            new_device.registration_id = token
+            new_device.save()
+            profile.fcm_devices.add(new_device)
+            profile.save()
+            print("Создан новый девайс")
 
          elif device_with_this_token and device_with_this_uuid:
              if device_with_this_token != device_with_this_uuid:

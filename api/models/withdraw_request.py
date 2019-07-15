@@ -8,11 +8,11 @@ class WithdrawRequest(models.Model):
         verbose_name = 'Запрос на вывод средств'
         verbose_name_plural = 'Запросы на вывод средств'
 
-    status = (
-	('pending', 'На рассмотрении'),
-	('paid', 'Выплачено'),
-    ('declined', 'Отказано')
-	)
+    status = [
+        ('pending', 'На рассмотрении'),
+        ('paid', 'Выплачено'),
+        ('declined', 'Отказано')
+    ]
 
     profile = models.ForeignKey(Profile, verbose_name="Профиль", on_delete=models.CASCADE)
     amount = models.DecimalField("Сумма", max_digits=7, decimal_places=2, default=0.00)

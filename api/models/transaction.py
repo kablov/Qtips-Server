@@ -8,10 +8,10 @@ class Transaction(models.Model):
         verbose_name = 'Транзакция'
         verbose_name_plural = 'Транзакции'
 
-    type = (
-	('tip_payment', 'Оплата чаевых'),
-	('withdraw', 'Снятие со счета'),
-	)
+    type = [
+        ('tip_payment', 'Оплата чаевых'),
+        ('withdraw', 'Снятие со счета'),
+    ]
 
     recipient = models.ForeignKey(Profile, verbose_name="Кому", on_delete=models.CASCADE)
     amount = models.DecimalField("Сумма", max_digits=7, decimal_places=2, default=0.00)

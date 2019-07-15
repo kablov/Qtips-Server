@@ -3,9 +3,9 @@ import os
 DATABASE_PRODUCTION_PASSWORD = os.environ['DATABASE_PRODUCTION_PASSWORD']
 CLOUDINARY_PRODUCTION_API_KEY = os.environ['CLOUDINARY_PRODUCTION_API_KEY']
 
-class SecretKeys:
 
-	DATABASE_PRODUCTION = {
+class SecretKeys:
+	DATABASE_PRODUCTION={
 		'default': {
 			'ENGINE': 'django.db.backends.postgresql_psycopg2',
 			'NAME': 'd4pphab2mh9g8n',
@@ -17,7 +17,7 @@ class SecretKeys:
 	}
 
 	CLOUDINARY_PRODUCTION = {
-		  'cloud_name': 'dbuvm0sag',
-		  'api_key': CLOUDINARY_PRODUCTION_API_KEY,
-		  'api_secret': 'F2zzgQP27QXIHdD8KERZO7WC4rE',
+		'cloud_name': 'dbuvm0sag',
+		'api_key': CLOUDINARY_PRODUCTION_API_KEY,
+		'api_secret': 'F2zzgQP27QXIHdD8KERZO7WC4rE',
 	}
