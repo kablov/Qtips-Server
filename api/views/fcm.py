@@ -24,22 +24,22 @@ class FCMTokenView(APIView):
             profile.save()
             print("Создан новый девайс")
 
-         elif device_with_this_token and device_with_this_uuid:
-             if device_with_this_token != device_with_this_uuid:
-                 device_with_this_token.delete()
-                 device_with_this_uuid.registration_id = token
-                 device_with_this_uuid.save()
-                 print("Девайс с таким же токеном удален, у девайса с таким же uuid перезаписаны поля user и token")
-             else:
-                 device_with_this_uuid.save()
-                 print("У девайса с таким же uuid перезаписано поле user")
+        elif device_with_this_token and device_with_this_uuid:
+            if device_with_this_token != device_with_this_uuid:
+                device_with_this_token.delete()
+                device_with_this_uuid.registration_id = token
+                device_with_this_uuid.save()
+                print("Девайс с таким же токеном удален, у девайса с таким же uuid перезаписаны поля user и token")
+            else:
+                device_with_this_uuid.save()
+                print("У девайса с таким же uuid перезаписано поле user")
 
-         elif not device_with_this_token and device_with_this_uuid:
-             device_with_this_uuid.registration_id = token
-             device_with_this_uuid.save()
-             print("У девайса с таким же uuid перезаписаны поля user и token")
+        elif not device_with_this_token and device_with_this_uuid:
+            device_with_this_uuid.registration_id = token
+            device_with_this_uuid.save()
+            print("У девайса с таким же uuid перезаписаны поля user и token")
 
-         return Response(status=status.HTTP_201_CREATED)
+        return Response(status=status.HTTP_201_CREATED)
 
 
 class DeleteDeviceIfLogoutView(APIView):
