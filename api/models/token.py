@@ -12,10 +12,17 @@ class Token(models.Model):
     def get_new_token():
         return get_random_string(length=32)
 
-    profile = models.OneToOneField(Profile, verbose_name="Профиль",
-                                   on_delete=models.DO_NOTHING)
-    token = models.CharField("Токен", validators=[MinLengthValidator(32)],
-                             max_length=32, unique=True, default=get_new_token)
+    profile = models.OneToOneField(
+        Profile, verbose_name="Профиль",
+        on_delete=models.DO_NOTHING
+    )
+    token = models.CharField(
+        "Токен",
+        validators=[MinLengthValidator(32)],
+        max_length=32,
+        unique=True,
+        default=get_new_token
+    )
 
     def __str__(self):
         return str(self.profile) + " " + self.token

@@ -5,7 +5,7 @@ CLOUDINARY_PRODUCTION_API_KEY = os.environ['CLOUDINARY_PRODUCTION_API_KEY']
 
 
 class SecretKeys:
-	DATABASE_PRODUCTION={
+	DATABASE_PRODUCTION = {
 		'default': {
 			'ENGINE': 'django.db.backends.postgresql_psycopg2',
 			'NAME': 'd4pphab2mh9g8n',
