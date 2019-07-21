@@ -15,13 +15,14 @@ class SmsCode(models.Model):
     phone = models.OneToOneField(
         Phone,
         verbose_name="Номер телефона",
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name='sms_code'
     )
     code = models.CharField(
         "Код",
         validators=[MinLengthValidator(4)],
         max_length=4,
-        default=get_new_code
+        default=get_new_code,
     )
     udid = models.CharField(max_length=36, blank=True)
 

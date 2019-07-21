@@ -30,7 +30,8 @@ class Profile(models.Model):
     phone = models.OneToOneField(
         Phone,
         verbose_name="Номер телефона",
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name='profile'
     )
     first_name = models.CharField("Имя", max_length=50)
     last_name = models.CharField("Фамилия", max_length=50)

@@ -14,7 +14,8 @@ class Token(models.Model):
 
     profile = models.OneToOneField(
         Profile, verbose_name="Профиль",
-        on_delete=models.DO_NOTHING
+        on_delete=models.DO_NOTHING,
+        related_name='token'
     )
     token = models.CharField(
         "Токен",

@@ -16,7 +16,8 @@ class Transaction(models.Model):
     recipient = models.ForeignKey(
         Profile,
         verbose_name="Кому",
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name='transactions'
     )
     amount = models.DecimalField(
         "Сумма",
