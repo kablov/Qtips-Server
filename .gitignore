@@ -18,3 +18,4 @@ qtips_server/qtips/__pycache__/
 .env
 qtipsenv
 *.bak
+db.sqlite3

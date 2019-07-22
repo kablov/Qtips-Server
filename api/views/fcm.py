@@ -7,13 +7,19 @@ from api.models import Profile, Token
 
 class FCMTokenView(APIView):
     def post(self, request, format=None):
-        token = Token.objects.get(token=request.META.get('HTTP_AUTHORIZATION')[6:])
+        token = Token.objects.get(
+            token=request.META.get('HTTP_AUTHORIZATION')[6:]
+        )
         profile = Profile.objects.get(token=token)
         uuid = request.data['uuid']
         token = request.data['fcm_token']
 
-        device_with_this_token = FCMDevice.objects.filter(registration_id=token).first()
-        device_with_this_uuid = FCMDevice.objects.filter(device_id=uuid).first()
+        device_with_this_token = FCMDevice.objects.filter(
+            registration_id=token
+        ).first()
+        device_with_this_uuid = FCMDevice.objects.filter(
+            device_id=uuid
+        ).first()
 
         if not device_with_this_token and not device_with_this_uuid:
             new_device = FCMDevice()
@@ -29,7 +35,8 @@ class FCMTokenView(APIView):
                 device_with_this_token.delete()
                 device_with_this_uuid.registration_id = token
                 device_with_this_uuid.save()
-                print("Девайс с таким же токеном удален, у девайса с таким же uuid перезаписаны поля user и token")
+                print("Девайс с таким же токеном удален, у девайса с таким же \
+                      uuid перезаписаны поля user и token")
             else:
                 device_with_this_uuid.save()
                 print("У девайса с таким же uuid перезаписано поле user")

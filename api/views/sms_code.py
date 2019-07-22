@@ -14,7 +14,10 @@ class RequestCodeView(APIView):
         access_key_check(request)
         country_code = request.data['country_code']
         number = request.data['number']
-        if Phone.objects.filter(Q(country_code=country_code) & Q(number=number)).count() == 0:
+
+        if Phone.objects.filter(
+            Q(country_code=country_code) & Q(number=number)
+        ).count() == 0:
             phone = Phone()
             phone.country_code = country_code
             phone.number = number
@@ -38,7 +41,9 @@ class RequestCodeView(APIView):
             }
             return Response(result, status=status.HTTP_201_CREATED)
         else:
-            phone = Phone.objects.get(Q(country_code=country_code) & Q(number=number))
+            phone = Phone.objects.get(
+                Q(country_code=country_code) & Q(number=number)
+            )
             SmsCode.objects.get(phone=phone).delete()
             sms_code = SmsCode()
             sms_code.phone = phone
@@ -68,8 +73,12 @@ class PhoneNumberVerificationView(APIView):
         number = request.data['number']
         code = request.data['code']
         udid = request.data['udid']
-        phone = Phone.objects.get(Q(country_code=country_code) & Q(number=number))
-        code_in_database = str(SmsCode.objects.get(phone=phone).code)
+        phone = Phone.objects.get(
+            Q(country_code=country_code) & Q(number=number)
+        )
+        code_in_database = str(
+            SmsCode.objects.get(phone=phone).code
+        )
         if code == code_in_database:
             phone.is_verified = True
             phone.save(update_fields=['is_verified'])

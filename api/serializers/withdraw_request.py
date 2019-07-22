@@ -8,4 +8,5 @@ class WithdrawRequestSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = WithdrawRequest
-        fields = ('id', 'profile', 'amount', 'request_date', 'status', 'reviewed_time')
+        fields = ('id', 'profile', 'amount', 'request_date', 'status',
+                  'reviewed_time')

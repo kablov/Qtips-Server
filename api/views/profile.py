@@ -30,7 +30,9 @@ class SignUpView(APIView):
         if udid == '':
             raise AccessDenied("Нет udid")
 
-        phone = Phone.objects.get(Q(country_code=country_code) & Q(number=number))
+        phone = Phone.objects.get(
+            Q(country_code=country_code) & Q(number=number)
+        )
         sms_code_udid = SmsCode.objects.get(phone=phone).udid
 
         if udid != sms_code_udid:
@@ -50,7 +52,9 @@ class SignUpView(APIView):
             if host.startswith('www.'):
                 host = host[4:]
             profile.payment_url = host + "/" + str(profile.external_id)
-            qr = requests.get('https://api.scanova.io/v2/qrcode/url' + '?url=' + profile.payment_url + '&apikey=' + settings.SCANOVA_API_KEY)
+            qr = requests.get('https://api.scanova.io/v2/qrcode/url' + '?url='
+                              + profile.payment_url + '&apikey='
+                              + settings.SCANOVA_API_KEY)
             profile.qr = upload_qr(qr.content, phone)
             profile.save()
 
@@ -59,7 +63,8 @@ class SignUpView(APIView):
             token.save()
 
         else:
-            raise ProfileEngaged("Аккаунт с указанным номером телефона уже существует")
+            raise ProfileEngaged(
+                "Аккаунт с указанным номером телефона уже существует")
 
         token = profile.token.token
         result = {
@@ -72,7 +77,9 @@ class ProfilePageView(APIView):
     @catch_errors
     def get(self, request, format=None):
         access_key_check(request)
-        token = Token.objects.get(token=request.META.get('HTTP_AUTHORIZATION')[6:])
+        token = Token.objects.get(
+            token=request.META.get('HTTP_AUTHORIZATION')[6:]
+        )
         profile = Profile.objects.get(token=token)
         serializer = ProfileSerializer(profile)
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -80,7 +87,9 @@ class ProfilePageView(APIView):
     @catch_errors
     def put(self, request, format=None):
         access_key_check(request)
-        token = Token.objects.get(token=request.META.get('HTTP_AUTHORIZATION')[6:])
+        token = Token.objects.get(
+                token=request.META.get('HTTP_AUTHORIZATION')[6:]
+        )
         profile = Profile.objects.filter(token=token)
 
         if 'first_name' in request.data:
@@ -98,7 +107,9 @@ class ProfilePageView(APIView):
         if 'photo' in request.data:
             new_photo = request.data['photo']
             if new_photo:
-                profile.update(photo=upload_photo(new_photo, profile.last().phone))
+                profile.update(
+                    photo=upload_photo(new_photo, profile.last().phone)
+                )
 
         profile = Profile.objects.get(token=token)
         serializer = ProfileSerializer(profile)
@@ -109,11 +120,14 @@ class SwitchNotificationsView(APIView):
     @catch_errors
     def post(self, request, format=None):
         access_key_check(request)
-        token = Token.objects.get(token=request.META.get('HTTP_AUTHORIZATION')[6:])
+        token = Token.objects.get(
+            token=request.META.get('HTTP_AUTHORIZATION')[6:]
+        )
         profile = Profile.objects.get(token=token)
         are_notifications_enabled = request.data['is_on']
 
         profile.are_notifications_enabled = are_notifications_enabled
         profile.save(update_fields=['are_notifications_enabled'])
 
-        return Response("Настройки уведомлений сохранены", status=status.HTTP_201_CREATED)
+        return Response("Настройки уведомлений сохранены",
+                        status=status.HTTP_201_CREATED)

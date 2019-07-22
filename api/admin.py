@@ -1,5 +1,6 @@
 from django.contrib import admin
-from api.models import Profile, Phone, SmsCode, Token, Transaction, WithdrawRequest
+from api.models import Profile, Phone, SmsCode, Token, Transaction, \
+    WithdrawRequest
 
 
 @admin.register(Profile)
@@ -40,6 +41,8 @@ class TransactionAdmin(admin.ModelAdmin):
 
 @admin.register(WithdrawRequest)
 class WithdrawRequestAdmin(admin.ModelAdmin):
-    list_display = ['profile', 'amount', 'request_date', 'status', 'reviewed_time']
+    list_display = [
+        'profile', 'amount', 'request_date', 'status', 'reviewed_time'
+    ]
     list_per_page = 20
     ordering = ('-id',)
