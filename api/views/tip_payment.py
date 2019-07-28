@@ -11,7 +11,7 @@ class TipPaymentView(APIView):
     def post(self, request, id, format=None):
         profile = Profile.objects.get(external_id=id)
         amount = request.data['amount']
-        if float(amount) > 50 and float(amount) < 100000:
+        if 50 < float(amount) < 100000:
             transaction = Transaction.objects.create(
                 recipient=profile,
                 amount=amount
@@ -40,7 +40,7 @@ class TestTipPaymentView(APIView):
     def post(self, request, format=None):
         profile = Profile.objects.get(external_id=538660)
         amount = request.data['amount']
-        if float(amount) > 50 and float(amount) < 100000:
+        if 50 < float(amount) < 100000:
             transaction = Transaction.objects.create(
                 recipient=profile,
                 amount=amount
