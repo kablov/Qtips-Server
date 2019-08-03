@@ -11,8 +11,10 @@ class Profile(models.Model):
         verbose_name_plural = 'Профили'
 
     def get_new_external_id():
+        profiles = Profile.objects.all()
+        existing_id_list = [profile.external_id for profile in profiles]
         external_id = random.SystemRandom().randint(100000, 999999)
-        while Profile.objects.filter(external_id=external_id).count() > 0:
+        while external_id in existing_id_list:
             external_id = random.SystemRandom().randint(100000, 999999)
         return external_id
 
