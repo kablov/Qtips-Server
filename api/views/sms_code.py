@@ -63,15 +63,16 @@ class PhoneNumberVerificationView(APIView):
         code_in_database = str(
             SmsCode.objects.get(phone=phone).code
         )
+
         if code == code_in_database:
             phone.is_verified = True
             phone.save(update_fields=['is_verified'])
             sms_code = SmsCode.objects.get(code=code)
             sms_code.udid = udid
             sms_code.save(update_fields=['udid'])
+
             if Profile.objects.filter(phone=phone).count() > 0:
-                profile = Profile.objects.get(phone=phone)
-                token = Token.objects.get(profile=profile).token
+                token = Token.objects.get(profile__phone=phone).token
                 result = {
                     'is_verified': True,
                     'token': token
@@ -85,4 +86,5 @@ class PhoneNumberVerificationView(APIView):
             result = {
                 'is_verified': False
             }
-            return Response(result, status=status.HTTP_200_OK)
+
+        return Response(result, status=status.HTTP_200_OK)
