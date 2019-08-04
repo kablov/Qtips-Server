@@ -17,4 +17,5 @@ urlpatterns = [
     path('terms/', web.terms, name="terms"),
     path('privacy/', web.privacy, name="privacy"),
     path('<int:id>/', tip_payment.TipPaymentView.as_view(), name="tip_payment"),
+    path('silk/', include('silk.urls', namespace='silk')),
 ]
