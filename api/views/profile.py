@@ -27,48 +27,46 @@ class SignUpView(APIView):
             photo = ''
         udid = request.data['udid']
 
-        if udid == '':
-            raise AccessDenied("Нет udid")
-
         phone = Phone.objects.get(
             Q(country_code=country_code) & Q(number=number)
         )
         sms_code_udid = SmsCode.objects.get(phone=phone).udid
 
+        if udid == '':
+            raise AccessDenied("Нет udid")
         if udid != sms_code_udid:
             raise AccessDenied("udids не совпадают")
 
-        if Profile.objects.filter(phone=phone).count() == 0:
-            profile = Profile()
-            profile.phone = phone
-            profile.first_name = first_name
-            profile.last_name = last_name
-            profile.email = email
-            if photo:
-                profile.photo = upload_photo(photo, phone)
-            else:
-                profile.photo = ''
-            host = request.META['HTTP_HOST']
-            if host.startswith('www.'):
-                host = host[4:]
-            profile.payment_url = host + "/" + str(profile.external_id)
+        if Profile.objects.filter(phone=phone).count() > 0:
+            raise ProfileEngaged(
+                "Аккаунт с указанным номером телефона уже существует")
+
+        profile = Profile()
+        profile.phone = phone
+        profile.first_name = first_name
+        profile.last_name = last_name
+        profile.email = email
+        if photo:
+            profile.photo = upload_photo(photo, phone)
+        else:
+            profile.photo = ''
+        host = request.META['HTTP_HOST']
+        if host.startswith('www.'):
+            host = host[4:]
+        profile.payment_url = host + "/" + str(profile.external_id)
+        try:
             qr = requests.get('https://api.scanova.io/v2/qrcode/url' + '?url='
                               + profile.payment_url + '&apikey='
                               + settings.SCANOVA_API_KEY)
             profile.qr = upload_qr(qr.content, phone)
-            profile.save()
+        except:
+            profile.qr = ''
+        profile.save()
 
-            token = Token()
-            token.profile = profile
-            token.save()
+        token = Token.objects.create(profile=profile)
 
-        else:
-            raise ProfileEngaged(
-                "Аккаунт с указанным номером телефона уже существует")
-
-        token = profile.token.token
         result = {
-            'token': token
+            'token': token.token
         }
         return Response(result, status=status.HTTP_201_CREATED)
 
