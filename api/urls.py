@@ -11,7 +11,7 @@ urlpatterns = [
     path('profile/me/history/', transaction.TransactionHistoryView.as_view()),
     path('profile/me/withdraw/', withdraw.WithdrawView.as_view()),
     path('withdraw/request/', withdraw.WithdrawRequestView.as_view()),
-    path('withdraw/requests/', withdraw.WithdrawRequestsView.as_view()),
+    path('withdraw/requests/', withdraw.WithdrawRequestHistoryView.as_view()),
     path('notifications/token/', fcm.FCMTokenView.as_view()),
     path('notifications/switch/', profile.SwitchNotificationsView.as_view()),
     path('logout/', fcm.DeleteDeviceIfLogoutView.as_view()),

@@ -42,7 +42,7 @@ class WithdrawRequestView(APIView):
                         status=status.HTTP_201_CREATED)
 
 
-class WithdrawRequestsView(APIView):
+class WithdrawRequestHistoryView(APIView):
     @catch_errors
     def get(self, request, format=None):
         access_key_check(request)
