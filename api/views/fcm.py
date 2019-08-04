@@ -22,10 +22,10 @@ class FCMTokenView(APIView):
         ).first()
 
         if not device_with_this_token and not device_with_this_uuid:
-            new_device = FCMDevice()
-            new_device.device_id = uuid
-            new_device.registration_id = token
-            new_device.save()
+            new_device = FCMDevice.objects.create(
+                device_id=uuid,
+                registration_id=token
+            )
             profile.fcm_devices.add(new_device)
             profile.save()
             # Создан новый девайс
