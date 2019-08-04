@@ -16,11 +16,11 @@ class WithdrawView(APIView):
         )
         profile = Profile.objects.get(token=token)
         amount = request.data['amount']
-        transaction = Transaction()
-        transaction.recipient = profile
-        transaction.type = 'withdraw'
-        transaction.amount = amount
-        transaction.save()
+        Transaction.objects.create(
+            recipient=profile,
+            type='withdraw',
+            amount=amount
+        )
         return Response("Заявка на снятие средств отправлена",
                         status=status.HTTP_201_CREATED)
 
@@ -34,10 +34,10 @@ class WithdrawRequestView(APIView):
         )
         profile = Profile.objects.get(token=token)
         amount = request.data['amount']
-        withdraw_request = WithdrawRequest()
-        withdraw_request.profile = profile
-        withdraw_request.amount = amount
-        withdraw_request.save()
+        WithdrawRequest.objects.create(
+            profile=profile,
+            amount=amount
+        )
         return Response("Заявка на снятие средств отправлена",
                         status=status.HTTP_201_CREATED)
 
