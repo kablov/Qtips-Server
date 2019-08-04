@@ -18,51 +18,35 @@ class RequestCodeView(APIView):
         if Phone.objects.filter(
             Q(country_code=country_code) & Q(number=number)
         ).count() == 0:
-            phone = Phone()
-            phone.country_code = country_code
-            phone.number = number
-            phone.save()
-            sms_code = SmsCode()
-            sms_code.phone = phone
-            sms_code.save()
-
-            full_phone_number = str(country_code) + str(number)
-            text = "Проверочный код для Qtips: " + sms_code.code
-            try:
-                send_sms(full_phone_number, text)
-            except:
-                result = {
-                    'is_sent': False
-                }
-                return Response(result, status=status.HTTP_201_CREATED)
-
-            result = {
-                'is_sent': True
-            }
-            return Response(result, status=status.HTTP_201_CREATED)
+            phone = Phone.objects.create(
+                country_code=country_code,
+                number=number
+            )
         else:
             phone = Phone.objects.get(
                 Q(country_code=country_code) & Q(number=number)
             )
+
+        if SmsCode.objects.filter(phone=phone).count() > 0:
             SmsCode.objects.get(phone=phone).delete()
-            sms_code = SmsCode()
-            sms_code.phone = phone
-            sms_code.save()
+            sms_code = SmsCode.objects.create(phone=phone)
+        else:
+            sms_code = SmsCode.objects.create(phone=phone)
 
-            full_phone_number = str(country_code) + str(number)
-            text = "Проверочный код: " + sms_code.code
-            try:
-                send_sms(full_phone_number, text)
-            except:
-                result = {
-                    'is_sent': False
-                }
-                return Response(result, status=status.HTTP_201_CREATED)
+        full_phone_number = str(country_code) + str(number)
+        text = "Проверочный код для Qtips: " + sms_code.code
 
+        try:
+            send_sms(full_phone_number, text)
             result = {
                 'is_sent': True
             }
-            return Response(result, status=status.HTTP_201_CREATED)
+        except:
+            result = {
+                'is_sent': False
+            }
+
+        return Response(result, status=status.HTTP_201_CREATED)
 
 
 class PhoneNumberVerificationView(APIView):
