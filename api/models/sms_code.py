@@ -27,4 +27,4 @@ class SmsCode(models.Model):
     udid = models.CharField(max_length=36, blank=True)
 
     def __str__(self):
-        return "Номер: " + str(self.phone) + " Код: " + self.code
+        return "Номер: {0} Код: {1}".format(self.phone, self.code)

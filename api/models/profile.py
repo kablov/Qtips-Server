@@ -74,4 +74,4 @@ class Profile(models.Model):
     )
 
     def __str__(self):
-        return str(self.external_id) + ") " + self.first_name + " " + self.last_name
+        return "{0}) {1} {2}".format(str(self.external_id), self.first_name, self.last_name)
