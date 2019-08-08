@@ -12,10 +12,10 @@ class Profile(models.Model):
 
     def get_new_external_id():
         profiles = Profile.objects.all()
-        existing_id_list = [profile.external_id for profile in profiles]
-        external_id = random.SystemRandom().randint(100000, 999999)
-        while external_id in existing_id_list:
-            external_id = random.SystemRandom().randint(100000, 999999)
+        existing_id_gen = (profile.external_id for profile in profiles)
+        external_id = random.randint(100000, 999999)
+        while external_id in existing_id_gen:
+            external_id = random.randint(100000, 999999)
         return external_id
 
     status = [
